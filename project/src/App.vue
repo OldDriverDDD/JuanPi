@@ -27,17 +27,18 @@ export default {
       left: 0;
       bottom: 0;
       right: 0;
-      height: 60px;
+      height: 147px;
       display: flex;
       align-items:center;
       justify-content:space-around;
       background-color: #fff;
       color: gray; 
-      line-height: 60px;
+      line-height: 147px;
+      border-top: 1px solid #f4f4f8;
   }
-  #app .tabbar a {
+ #app .tabbar a {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 36px;
   }
 
 </style>
