@@ -42,12 +42,12 @@
 				</div>
 			</li>
 		</ul>
-
+		<dress router-link to ="/dress"></dress>
 	</div>
 </template>
 
 <script>
-
+import Dress from "./dress"
 	export default{
 		data(){
 			return {
@@ -71,9 +71,9 @@
 				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
 			})
 		},
-		// components:{
-		// 	Dress
-		// }
+		components:{
+			Dress
+		}
 
 	}
 </script>
