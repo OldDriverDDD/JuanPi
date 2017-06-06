@@ -4,7 +4,7 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
-	   	   
+
 	   </div>
 	   <div class="topBar">
 			<router-link to = "/today/new" class="topbarli">上新</router-link>
@@ -61,8 +61,6 @@ import Dress from "./dress"
 	.logo{
 		width: 100%;
 		height: 1rem;
-		padding-left: 1.08rem;
-		padding-right: 1.08rem;
 		padding-top:0.3rem;
 		background-color: #fff; 
 	}
