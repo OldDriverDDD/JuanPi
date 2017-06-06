@@ -13,37 +13,39 @@
 		</div>
 		<div class="order">
 			我的订单
+			<i class="arrow"></i>
 			<span>全部订单</span>
+			
 		</div>
 		<div class="afterSale">
 			<ul>
 				<router-link to="/mine/pay" tag="li">
-					<i class="aaa"></i>
+					<i class="pay"></i>
 					<p>待付款</p>
 				</router-link>
 				<router-link to="/mine/conglobation" tag="li">
-					<img src="" alt="">
+					<i class="conglobation"></i>
 					<p>待成团</p>
 				</router-link>
 				<router-link to="/mine/take" tag="li">
-					<img src="" alt="">
-					<p>待付款</p>
+					<i class="take"></i>
+					<p>待收货</p>
 				</router-link>
 				<router-link to="/mine/refund" tag="li">
-					<img src="" alt="">
-					<p>待付款</p>
+					<i class="refund"></i>
+					<p>退款/售后</p>
 
 				</router-link>
 			</ul>
 		</div>
 		<div class="mines">
-			<p>我的收藏</p>
-			<p>我的优惠券</p>
-			<p>我的拼团</p>
+			<p>我的收藏<i class="arrow"></i></p>
+			<p>我的优惠券<i class="arrow"></i></p>
+			<p>我的拼团<i class="arrow"></i></p>
 		</div>
 		<div class="serviceCenter">
-			<p>客服中心</p>
-			<p>关于卷皮</p>
+			<p>客服中心<i class="arrow"></i></p>
+			<p>关于卷皮<i class="arrow"></i></p>
 		</div>
 		<div class="footer-nav">
 			<a href="javascript:;">返回首页</a>
@@ -133,17 +135,42 @@
 		color: #333;
 		line-height: 1.44rem;
 		text-indent: 0.57rem;
+		overflow: hidden;
 	}
 	.order span {
 		float: right;
-		margin-right: 0.24rem;
 		color: #999;
+	}
+	.arrow {
+		font-family: "juanPiIco";
+		font-size: 0.36rem;
+		font-style: normal;
+		float: right;
+		color: #999;
+		position: relative;
+    	left: -0.37rem;
+	}
+	.arrow:before {
+		content: "\e61a";
 	}
 	.afterSale {
 		width: 100%;
-		height: 2.39rem;
+		height: 2.35rem;
 		background-color: #fff;
 		margin-bottom: 0.32rem;
+	}
+	.afterSale ul {
+		display: flex;
+	}
+	.afterSale ul li {
+		flex: 1;
+		text-align: center;
+	}
+	.afterSale ul p {
+		color: #666;
+    	text-align: center;
+    	font-size: 0.36rem;
+    	margin-top: 7px;
 	}
 	.mines p, .serviceCenter p {
 		width: 100%;
@@ -195,12 +222,21 @@
 	    top: 27%;
 	    left: 26%;
 	}
-	.aaa{
+	.pay, .conglobation, .take, .refund {
 		font-family: "juanPiIco";
-		font-size: 70px;
+		font-size: 0.85rem;
 		font-style: normal;
 	}
-	.aaa:before{
+	.pay:before{
 		content: "\e614";
+	}
+	.conglobation:before {
+		content: "\e623";
+	}
+	.take:before {
+		content: "\e615";
+	}
+	.refund:before {
+		content: "\e61d";
 	}
 </style>
