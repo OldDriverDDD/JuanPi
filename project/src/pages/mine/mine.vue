@@ -19,15 +19,35 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.header {
 		width: 100%;
-		height: 432px;
-		background: #ff464e;
+		height: 4.32rem;
+		background-color: #ff464e;
 		overflow: hidden;
+		background-image: linear-gradient(146deg,#ff464e 34%,#fc7400);
+	}
+	.header > div:first-of-type {
+		height: 1.32rem;
+		text-align: center;
+	}
+	.header > div:nth-of-type(2) {
+		height: 2.34rem;
+	}
+	.header > div:first-of-type > span:first-of-type {
+		
+	}
+	.header > div:first-of-type > span:nth-of-type(2) {
+		display: inline-block;
+		font-size: 0.54rem;
+		color: #fff;
 	}
 	.header a {
-		font-size: 0.179487rem;
+		display: inline-block;
+		width: 4.08rem;
+		height: 2.34rem;
+		color: #fff;
+		font-size: 0.6rem;
 	}
 	/*[data-dpr="3"] #mine .header {
 	    height: 432px;
