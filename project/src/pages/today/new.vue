@@ -19,15 +19,24 @@
 			<img :src="gtopList.pic">
 		</div>
 		<!-- 商品列表 -->
-		<ul class="goodlist">
-			<li>
+		<ul class="today_goodlist">
+			<li v-for = "item, i in goodList">
 				<div>
-					<img src="" alt="" class="goodPic">
-					<img src="" alt="" class="goodlogo">
+					<img :src="item.pic_url"  class="goodPic">
+					<img :src="item.shop_logo"  class="goodlogo">
 				</div>
-				<div>
-					<p></p>
-					<h3></h3>
+				<div class="today_goodInfo" :class = "{'cText':item.sub_title}">
+
+					<p v-if = " item.coupon " >{{ item.coupon.rules[0].aeBankInfo  }}</p>
+					
+					<p>{{ item.title }}</p>
+					
+					<p v-if = "item.sub_title" :class = "{'quanText':item.sub_title}">
+						{{ item.sub_title }}
+					</p>
+					
+					<span :class = "{'sText':item.sub_title}">{{ item.residue }}</span>
+					
 				</div>
 			</li>
 		</ul>
@@ -42,20 +51,26 @@
 				adsList:[],
 				gtopList:[],
 				goodList:[]
-				
 			}
 		},
 		created(){
 
 			this.axios.get('../../static/data/lunbo.json').then(res=>{
-				console.log(res.data.module_ads.multi_block[2].data[0].child);
+				// console.log(res.data.module_ads.multi_block[2].data[0].child);
 				this.topBanner = res.data.topbanner.pic_url;
 				this.navBar = res.data.module_ads.multi_block[0].data[0].child;
 				this.adsList =  res.data.module_ads.multi_block[1].data[0].child;
 				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
 			}),
 			this.axios.get('../../static/data/todaylist.json').then(res=>{
-				console.log(res);
+				// console.log(res.data.list);
+				this.goodList = res.data.list
+				
+				console.log(this.goodList)
+
+				 
+
+
 			})
 		},
 		// components:{
@@ -66,6 +81,7 @@
 
 </script>
 <style type="text/css">
+	.
 	.bannerBar{
 		width: 100%;
 		
@@ -79,7 +95,7 @@
 	    padding: 0.38rem 0;
 	    height: 1.90rem;
 	    background-color: #fff;
-		
+		margin-top: 1.0rem; 
 		    
 		
 		
@@ -111,6 +127,83 @@
 		}
     .goodtopList img{
     	width: 100%;
+    	    height: 1.58rem;
     }
+    /*商品列表*/
+    .today_goodlist{
+    	width: 100%;
+    	/*display: inline-block;*/
+    	overflow: hidden;
+    }
+    .goodPic {
+    	height: 6.1rem;
+    }
+    .goodlogo{
+		position: absolute;
+	    right: 0.3rem;
+	    bottom: 0rem;
+	    background: #fff
+    }
+    .today_goodlist li {
+    	display: inline-block;
+    	width: 6.21rem;
+    	background-color: #fff;
+
+    }
+    .today_goodlist li:nth-child(2n+1) {
+    	margin-right: 0.22rem;
+    	width: 49%;
+    }
+    .today_goodlist li:nth-child(2n) {
+    	width: 49%;
+    }
+    .today_goodlist div:nth-of-type(1){
+		position: relative;
+    }
+    .today_goodInfo{
+    	position: relative;
+    	line-height: 0.6rem;
+    	text-indent: 0.3rem;
+    }
+     .today_goodInfo p:nth-of-type(1){
+		font-size: 0.39rem;
+		color: #ff464e;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+    }
+    .today_goodInfo p:nth-of-type(2){
+		font-size: 0.36rem;
+		color: #333;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+    }
+    /* .today_goodInfo p:nth-of-type(3){
+    	margin-left:-0.1rem; 
+
+    }*/
+    .today_goodInfo span{
+		font-size: 0.33rem;
+		color: #bbb;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		
+    }
+    .cText{
+    	text-align: center;
+    }
+    .quanText{
+		text-indent: -0.62rem;
+    }
+    .today_goodInfo .sText{
+    	position: absolute;
+    	right: 96px;
+    	bottom: 0;
+
+    }
+
 
 </style>

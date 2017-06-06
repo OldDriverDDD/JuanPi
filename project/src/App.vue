@@ -35,6 +35,7 @@ export default {
       color: gray; 
       line-height: 147px;
       border-top: 1px solid #f4f4f8;
+      z-index: 2;
   }
  #app .tabbar a {
     text-decoration: none;
