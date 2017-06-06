@@ -42,10 +42,12 @@
 				</div>
 			</li>
 		</ul>
+
 	</div>
 </template>
 
 <script>
+
 	export default{
 		data(){
 			return {
@@ -164,4 +166,10 @@
 		    float: left;
 		}
     
+
+
+
+	
+
+
 </style>
