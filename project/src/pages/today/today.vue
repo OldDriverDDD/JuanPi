@@ -1,20 +1,16 @@
 <template>
-	<!-- </div> -->
 	<div id="today">
-	 
-	</div>
 
+	
+
+	</div>
 </template>
 
 <script>
-
-
-	export default {
-		name: "today",
-		
-	}
+	
 </script>
 
 <style>
+	
 
 </style>
