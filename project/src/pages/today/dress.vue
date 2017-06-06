@@ -26,6 +26,13 @@
 		</div>
 		<!-- 线 -->
 		<div class="line"></div>
+		<div class="brand">
+			<div>
+				<div class="brands" v-for="item in data3">
+					<img :src="item.pic">
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
