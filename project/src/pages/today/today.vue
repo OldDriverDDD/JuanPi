@@ -1,79 +1,28 @@
 <template>
 	<div id="today">
-		<!-- 头部广告 -->
-		<div class="bannerBar">
-			<img :src="topBanner" >
-		</div>
+		
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
 	   </div>
-	   <ul class="topBar">
-			<li v-for="item in data " class="topbarli">{{ item.title }}</li>
-		</ul>
-		<div class="swipper"></div>
-		<ul class="modelBar">
-			<li v-for = "(item,index) in navBar ">
-				<a >
-					<img :src="item.pic">
-					<p>{{ item.words }}123</p>
-				</a>
-			</li>
-		</ul>
-		<!-- 直发仓，量贩超市，每日抽奖 -->
-		<ul class="adslist">
-			<li v-for = "(item,index) in adsList">
-				<img :src="item.pic">
-			</li>
-		</ul>	
-		<div>
-			<img :src="gtopList.pic">
+	   <div class="topBar">
+			<router-link to = "/today/new" class="topbarli">上新</router-link>
+			<router-link to = "/today/dress" class="topbarli">女装</router-link>
+			<router-link to = "/today/shoesBag" class="topbarli">鞋包</router-link>
+			<router-link to = "/today/mother" class="topbarli">母婴</router-link>
+			<router-link to = "/today/shuma" class="topbarli">数码</router-link>
+			<router-link to = "/today/house" class="topbarli">居家</router-link>
+			<router-link to = "/today/man" class="topbarli">男士</router-link>
+			<router-link to = "/today/beautys" class="topbarli">美妆</router-link>
+			<router-link to = "/today/cate" class="topbarli">美食</router-link>
 		</div>
-		<!-- 商品列表 -->
-		<ul class="goodlist">
-			<li>
-				<div>
-					<img src="" alt="" class="goodPic">
-					<img src="" alt="" class="goodlogo">
-				</div>
-				<div>
-					<p></p>
-					<h3></h3>
-				</div>
-			</li>
-		</ul>
+	   <router-view></router-view>
 
 	</div>
 </template>
 
 <script>
-
 	export default{
-		data(){
-			return {
-				topBanner:"",
-				navBar:[],
-				adsList:[],
-				gtopList:[],
-				data:[]
-			}
-		},
-		created(){
-			this.axios.get('../../../static/data/indexmenu.json').then(res=>{
-				this.data = res.data.menu_list[0].subtab;
-			})
-
-			this.axios.get('../../static/data/lunbo.json').then(res=>{
-				console.log(res.data.module_ads.multi_block[2].data[0].child);
-				this.topBanner = res.data.topbanner.pic_url;
-				this.navBar = res.data.module_ads.multi_block[0].data[0].child;
-				this.adsList =  res.data.module_ads.multi_block[1].data[0].child;
-				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
-			})
-		},
-		// components:{
-		// 	Dress
-		// }
 
 	}
 </script>
@@ -116,56 +65,13 @@
 		background-color: #fff;
 		
 	}
-	#today ul li:hover{
+	#today .topbarli:hover{
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
 	}
 
 
-	.bannerBar{
-		width: 100%;
-		
-	}
-	.bannerBar img{
-			width: 100%;
-			display: block;
-		}
-	.modelBar{
-		width: 100%;
-	    padding: 0.38rem 0;
-	    height: 1.90rem;
-	    background-color: #fff;
-		
-		    
-		
-		
-	}
-	.modelBar li{
-			width: 25%;
-		    text-align: center;
-		    float: left;
-		    line-height: 0.71rem;
-		    overflow: hidden;
-		  }
-	 .modelBar img{
-		    	width: 1.20rem;
-		    	height: 1.20rem;
-		    }
-	.modelBar a{
-			font-size: 0.36rem;
-			color: #666;
-		}
-	.adslist{
-		height: 7.55rem;
-		margin: 0.38rem 0 0.38rem 0;
-		
-	}
-	.adslist img{
-			display: block;
-		    width: 49.9%;
-		    float: left;
-		}
-    
+	
 
 
 

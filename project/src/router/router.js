@@ -9,6 +9,16 @@ import Direct from '../pages/direct/direct'
 import Global from '../pages/global/global'
 import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
+// today二级路由
+import New from '../pages/today/new'
+import Dress from '../pages/today/dress'
+import Mother from '../pages/today/mother'
+import Shuma from '../pages/today/shuma'
+import Man from '../pages/today/man'
+import Beautys from '../pages/today/beautys'
+import Shoesbag from '../pages/today/shoesBag'
+import House from '../pages/today/house'
+import Cate from '../pages/today/cate'
 
 
 // 定义路由规则
@@ -54,7 +64,19 @@ export default new VueRouter({
 		{
 			path: '', component: Today
 		},{
-			path: '/today', component: Today
+			path: '/today', component: Today, children: [
+		        { path: '', component: New },
+		        { path: 'new', component: New },
+		        { path: 'dress', component: Dress },
+		        { path: 'shoesBag', component: Shoesbag },
+		        { path: 'mother', component: Mother },
+		        { path: 'shuma', component: Shuma },
+		         { path: 'house', component: House },
+		        { path: 'man', component: Man },
+		         { path: 'beautys', component: Beautys },
+		        { path: 'cate', component: Cate }
+		    ]
+
 		},{
 			path: '/direct', component: Direct
 		},{
