@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 	import Dress from './dress'
 	export default {
 		name: "today",
