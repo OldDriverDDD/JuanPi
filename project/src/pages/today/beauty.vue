@@ -1,5 +1,5 @@
 <template>
-	<h2>鞋包</h2>
+	<h2>美妆</h2>
 </template>
 <script type="text/javascript">
 	

@@ -26,6 +26,40 @@
 		</div>
 		<!-- 线 -->
 		<div class="line"></div>
+		<div class="brand">
+			
+				<div class="brands" v-for="item in data3">
+					<img :src="item.pic">
+				</div>
+			
+		</div>
+		<div class="brand">
+			
+				<div class="brands" v-for="item in data4">
+					<img :src="item.pic">
+				</div>
+			
+		</div>
+		<div class="line"></div>
+		<div class="updata">
+			<img :src="data5">
+		</div>
+		
+		<!-- 女装专场 -->
+		<div class="specil">
+			<div class="lists" v-for="item  in sdata" @click="push(item)">
+				<img :src="item.pic_url">
+				<p class="favorAble">{{ item.coupon.rules[0].aeBankInfo}}</p>
+				<p class="nameSpecil">{{ item.coupon.abName}}</p>
+				<span class="newUp">{{item.residue}}</span>
+				<i class="shopLogo">
+					<img :src=" item.shop_logo ">
+				</i>
+			</div>
+		</div>
+		<div class="null">
+			
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -36,8 +70,10 @@
 				data:[],
 				data1:[],
 				data2:[],
-				data3:[]
-
+				data3:[],
+				data4:[],
+				data5:[],
+				sdata:[]
 			}
 		},
 		created(){
@@ -48,11 +84,27 @@
 				this.data1 = res.data.module_ads.multi_block[1].data[0].child;
 				this.data2 = res.data.module_ads.multi_block[2].data[0].child;
 				this.data3 = res.data.module_ads.multi_block[3].data[0].child;
-				// this.data4 = res.data.module_ads.multi_block[4].data[0].child;
+				this.data4 = res.data.module_ads.multi_block[4].data[0].child;
+				this.data5 = res.data.module_ads.multi_block[5].data[0].child[0].pic;
 
 				console.log(res.data);
 
+			},
+			this.axios.get('../../../static/data/Wspecial.json').then(res=>{
+				this.sdata = res.data.list;
 			})
+			)
+		},
+		methods:{
+			//在方法中进行路由跳转，并传递参数
+			push(item){
+				this.$router.push({
+					path:'/details/',
+					query:{
+
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -60,6 +112,7 @@
 	/*女装分类菜单*/
 	.kindClass{
 		width: 100%;
+		background-color: #fff;
 
 	}
 	.kindClass div{
@@ -86,6 +139,8 @@
 	/*搭配 热销 一周流行*/
 	.clothing{
 		width:100%;
+		overflow: hidden;
+		background-color: #fff;
 
 	}
 	.clothing div:nth-of-type(1) {
@@ -105,5 +160,94 @@
 	.clothing div:nth-of-type(2) img,.clothing div:nth-of-type(3) img{
 		width: 100%;
 		
+	}
+	/*品牌列表 四个*/
+	.brand{
+		width: 100%;
+		height: 2.2.9808rem;
+		background-color: #fff;
+	}
+	
+	.brands{
+		width: 50%;
+		display: inline-block;
+	}
+	.brands img {
+		width: 100%;
+	}
+	/*上新时间提示*/
+	.updata{
+		/*margin-bottom: 50px;*/
+		width: 100%;
+		height: 1.58976rem;
+	}
+	.updata img{
+		width: 100%;
+	}
+	/*空div*/
+	.null{
+		width: 100%;
+		height: 200px;
+	}
+	/*专场列表*/
+	.specil{
+		width: 100%;
+		background-color: #fff;
+		
+	}
+	.specil div:nth-child(2n+1){
+		width: 49.5%;
+		display: inline-block;
+		margin-right: 0.1rem;
+		position: relative;
+		margin-top: 0.15rem;
+	}
+	.specil div:nth-child(2n){
+		width: 49.69%;
+		display: inline-block;
+		/*margin-right: 1px;*/
+		position: relative;
+		margin-top: 0.15rem;
+	}
+	.lists img{
+		width: 100%;
+	}
+	.favorAble{
+		font-size: 0.39rem;
+		color: #ff464e;
+		height: 0.72rem;
+		line-height: 0.72rem;
+		margin-left: 0.24rem;
+		margin-right: 0.24rem;
+	}
+	.nameSpecil{
+		font-size: 0.36rem;
+		color: #333;
+		width: 70%;
+		line-height: 0.6rem;
+		height: 0.6rem;
+		margin-left: 0.24rem;
+	}
+	/*上新*/
+	.newUp{
+		font-size: 0.33rem;
+		color: #bbb;
+		float: right;
+		position: absolute;  
+		right: 0.4rem;
+		bottom:0.05rem;
+	}
+	/*商品logo*/
+	.shopLogo{
+		width: 1.5rem;
+		height: 1rem;
+		line-height: 1rem;
+		border-width: 2px;
+		position: absolute;
+		bottom:1rem;
+		right: 0.4rem;
+		border:1px solid #ebebeb;
+		background-color: #fff;
+		z-index: 10;
 	}
 </style>
