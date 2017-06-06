@@ -1,87 +1,91 @@
 <template>
-	<!-- </div> -->
 	<div id="today">
-	   <div class="logo">
-	   	   <img src="../../../static/hyimages/top-logo.png">
-	   </div>
-	   <ul class="topBar">
-			<li v-for="item in data ">{{ item.title }}</li>
-
-	   </ul>
-		<!-- <h2>今日上新</h2> -->
-		<Dress></Dress>
+		<div class="bannerBar">
+			<img :src="topBanner" >
+		</div>
+		<div class="logo"></div>
+		<div class="topbar"></div>
+		<div class="swipper"></div>
+		<ul class="modelBar">
+			<li v-for = "(item,index) in navBar ">
+				<a >
+					<img :src="item.pic">
+					<p>{{ item.words }}123</p>
+				</a>
+			</li>
+		</ul>
+		<!-- 直发仓，量贩超市，每日抽奖 -->
+		<ul class="adslist">
+			<li v-for = "(item,index) in adsList">
+				<img :src="item.pic">
+			</li>
+		</ul>	
+		<div>
+			<img :src="gtopList.pic">
+		</div>
 	</div>
-
 </template>
 
 <script>
-
-	import Dress from './dress'
-	export default {
-		name: "today",
+	export default{
 		data(){
 			return {
-				data:[]
+				topBanner:"",
+				navBar:[],
+				adsList:[],
+				gtopList:[]
 			}
 		},
 		created(){
-			this.axios.get('../../../static/data/indexmenu.json').then(res=>{
-				this.data = res.data.menu_list[0].subtab;
+
+			this.axios.get('../../static/data/lunbo.json').then(res=>{
+				console.log(res.data.module_ads.multi_block[2].data[0].child);
+				this.topBanner = res.data.topbanner.pic_url;
+				this.navBar = res.data.module_ads.multi_block[0].data[0].child;
+				this.adsList =  res.data.module_ads.multi_block[1].data[0].child;
+				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
 			})
-		},
-		components:{
-			Dress
 		}
 	}
 </script>
 
-<style>
-	#today{
-		position: fixed;
-		z-index: 100;
+<style lang = "less" >
+	.bannerBar{
 		width: 100%;
-		font-size: 0.987179rem;
-		background-color: #fff;
+		img{
+			width: 100%;
+			display: block;
+		}
 	}
-	/*上面的logo部分*/
-	.logo{
+	.modelBar{
 		width: 100%;
-		height: 132px;
-		border-bottom: 1px solid #dedede;
-		padding-left: 108px;
-		padding-right: 108px;
-
+	    padding: 38px 0;
+	    height: 190px;
+	    background-color: #fff;
+		li{
+			width: 25%;
+		    text-align: center;
+		    float: left;
+		    line-height: 71px;
+		    overflow: hidden;
+		    img{
+		    	width: 120px;
+		    	height: 120px;
+		    }
+		}
+		a{
+			font-size: 36px;
+			color: #666;
+		}
 	}
-	.logo img{
-		height: 72px;
-		display: block;
-		padding: 0.102564rem 0;
-		text-align: center;
-		padding-left: 1.9rem;
-
+	.adslist{
+		height: 755px;
+		margin: 38px 0 38px 0;
+		img{
+			display: block;
+		    width: 49.9%;
+		    float: left;
+		}
 	}
-	#today ul{
-		display: flex;
-		white-space: nowrap;
-	    overflow: auto;
-	    overflow-y: hidden;
-
-	}
-	#today ul li{
-		font-size: 42px;
-		height: 114px;
-		line-height: 114px;
-		text-align: center;
-		color: #333;
-		white-space: nowrap;
-		box-sizing:border-box;
-		padding: 0 0.25rem;
-		margin:auto;
-		background-color: #fff;
-		
-	}
-	#today ul li:hover{
-		color: #ff464e;
-		border-bottom: 4px solid #ff464e;
-	}
+    
 </style>
