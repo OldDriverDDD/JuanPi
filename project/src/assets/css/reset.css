@@ -57,3 +57,11 @@ a:hover {
     display: block;
     clear: both;
 }
+
+
+/*自定义字体*/
+@font-face{
+    font-family: "juanPiIco";
+    src: url("../../../static/iconfont.woff");
+}
+

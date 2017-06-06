@@ -6,13 +6,36 @@
 				<span>个人中心</span>
 			</div>
 			<div>
-				<a href="">注册</a>
+				<a href="javascript:;">注册</a>
 				<i class="line"></i>
-				<a href="">登录</a>
+				<a href="javascript:;">登录</a>
 			</div>
 		</div>
-		<div class="order"></div>
-		<div class="afterSale"></div>
+		<div class="order">
+			我的订单
+			<span>全部订单</span>
+		</div>
+		<div class="afterSale">
+			<ul>
+				<router-link to="/mine/pay" tag="li">
+					<i class="aaa"></i>
+					<p>待付款</p>
+				</router-link>
+				<router-link to="/mine/conglobation" tag="li">
+					<img src="" alt="">
+					<p>待成团</p>
+				</router-link>
+				<router-link to="/mine/take" tag="li">
+					<img src="" alt="">
+					<p>待付款</p>
+				</router-link>
+				<router-link to="/mine/refund" tag="li">
+					<img src="" alt="">
+					<p>待付款</p>
+
+				</router-link>
+			</ul>
+		</div>
 		<div class="mines">
 			<p>我的收藏</p>
 			<p>我的优惠券</p>
@@ -23,10 +46,16 @@
 			<p>关于卷皮</p>
 		</div>
 		<div class="footer-nav">
-			<a href="">返回首页</a>
-			<a href="">客户端</a>
-			<a href="">电脑版</a>
+			<a href="javascript:;">返回首页</a>
+			<a href="javascript:;">客户端</a>
+			<a href="javascript:;">电脑版</a>
 		</div>
+		<div class="footer">
+			<div class="cut-line"></div>
+			<h2>copyright © 武汉奇米网络科技有限公司</h2>
+			<div class="cut-empty"></div>
+		</div>
+
 	</div>
 </template>
 
@@ -99,7 +128,16 @@
 		width: 100%;
 		height: 1.44rem;
 		background-color: #fff;
-		border-bottom: 1px solid #f4f4f8;
+		border-bottom: 2px solid #f4f4f8;
+		font-size: 0.45rem;
+		color: #333;
+		line-height: 1.44rem;
+		text-indent: 0.57rem;
+	}
+	.order span {
+		float: right;
+		margin-right: 0.24rem;
+		color: #999;
 	}
 	.afterSale {
 		width: 100%;
@@ -111,21 +149,58 @@
 		width: 100%;
 		height: 1.44rem;
 		background-color: #fff;
-		border-bottom: 1px solid #f4f4f8;
+		border-bottom: 2px solid #f4f4f8;
 		font-size: 0.45rem;
 		color: #333;
 		line-height: 1.44rem;
 		text-indent: 0.57rem;
 	}
-	.mines {
+	.mines, .serviceCenter {
 		margin-bottom: 0.32rem;
 	}
 	.footer-nav {
 		width: 100%;
 		height: 1.38rem;
 		background-color: #fff;
+		line-height: 1.38rem;
+		display: flex;
+		text-align: center;
+		border-bottom: 2px solid #f4f4f8;
 	}
 	.footer-nav a {
-		font-size: .2rem;
+		flex: 1;
+		font-size: .36rem;
+		color: #666;
+	}
+	.cut-line {
+		width: 100%;
+		height: 0.65rem;
+		background-color: #fff;
+		border-bottom: 2px solid #f4f4f8;
+	}
+	.cut-empty {
+		width: 100%;
+		height: 0.85rem;
+		background-color: #fff;
+	}
+	.footer {
+		position: relative;
+	}
+	.footer > h2 {
+		font-size: .32rem;
+	    color: #bbb;
+	    font-weight: 400;
+	    background-color: #fff;
+	    position: absolute;
+	    top: 27%;
+	    left: 26%;
+	}
+	.aaa{
+		font-family: "juanPiIco";
+		font-size: 70px;
+		font-style: normal;
+	}
+	.aaa:before{
+		content: "\e614";
 	}
 </style>
