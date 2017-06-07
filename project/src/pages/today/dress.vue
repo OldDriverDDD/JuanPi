@@ -1,5 +1,6 @@
 <template>
 	<div id="dress">
+			
 	<!-- 女装分类  上面一行-->
 		<div class="kindClass">
 			<div>
@@ -47,7 +48,7 @@
 		
 		<!-- 女装专场 -->
 		<div class="specil">
-			<div class="lists" v-for="item  in sdata" @click="push(item)">
+			<div class="lists" v-for="item  in sdata" @click="transmit(item)">
 				<img :src="item.pic_url">
 				<p class="favorAble">{{ item.coupon.rules[0].aeBankInfo}}</p>
 				<p class="nameSpecil">{{ item.coupon.abName}}</p>
@@ -57,9 +58,14 @@
 				</i>
 			</div>
 		</div>
+		<div class="top" @click="goTop">
+			<img src="../../../static/hyimages/juanpi_files/back-top.png">
+		</div>
 		<div class="null">
 			
 		</div>
+		<!-- <div v-html="htmlContent"></div> -->
+
 	</div>
 </template>
 <script type="text/javascript">
@@ -73,7 +79,9 @@
 				data3:[],
 				data4:[],
 				data5:[],
-				sdata:[]
+				sdata:[],
+				sUrl:[],
+				htmlContent: ''
 			}
 		},
 		created(){
@@ -89,26 +97,65 @@
 
 				console.log(res.data);
 
-			},
+			});
 			this.axios.get('../../../static/data/Wspecial.json').then(res=>{
 				this.sdata = res.data.list;
-			})
-			)
+				// this.sUrl = res.data.list[0].target_url;
+
+				this.sdata.map(item => {
+					this.sUrl = item.target_url;
+					console.log(item.target_url);
+				});
+
+				console.log('fjlkdsajflkdsajflkdsafjdslafjlkdsa');
+				console.log(this.sUrl);
+
+				
+				
+			});
+
+
+			// this.axios.get('/static/data/info.html').then(response => {
+			// 	console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa')
+			// 	console.log(response.data);
+
+			// 	this.htmlContent = response.data;
+			// })
+			
 		},
 		methods:{
 			//在方法中进行路由跳转，并传递参数
-			push(item){
-				this.$router.push({
-					path:'/details/',
-					query:{
+			transmit(item){
 
-					}
-				})
+				// console.log(item)
+				id:JSON.stringify(item),
+				this.$router.push('/special/'+item.title)
+
+			},
+			goTop(){
+				document.body.scrollTop=0;
+				document.documentElement.scrollTop=0;
 			}
 		}
 	}
 </script>
 <style type="text/css" scoped>
+	/*回到顶部*/
+	.top{
+		width: 1.2rem;
+		height: 1.2rem;
+		margin-top: 0.4rem;
+		position: fixed;
+		bottom: 2rem;
+		right: 4%;
+		margin-left: 34%;
+		z-index: 300;
+		background-color: #fff;
+		border-radius: 50%;
+	}
+	.top img{
+		width: 100%;
+	}
 	/*女装分类菜单*/
 	.kindClass{
 		width: 100%;

@@ -11,6 +11,8 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+//女装跳转广告页面
+import Special from '../components/special'
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -61,23 +63,25 @@ import Cate from '../pages/today/cate'
 
 // export defalut router
 
-export default new VueRouter({
-	routes: [
-		{
-			path: '', component: Today
-		},{
-			path: '/today', component: Today, children: [
+const todyChild = [
 		        { path: '', component: New },
 		        { path: 'new', component: New },
 		        { path: 'dress', component: Dress },
 		        { path: 'shoesBag', component: Shoesbag },
 		        { path: 'mother', component: Mother },
 		        { path: 'shuma', component: Shuma },
-		         { path: 'house', component: House },
+		        { path: 'house', component: House },
 		        { path: 'man', component: Man },
-		         { path: 'beautys', component: Beautys },
+		        { path: 'beautys', component: Beautys },
 		        { path: 'cate', component: Cate }
-		    ]
+		    ];
+
+export default new VueRouter({
+	routes: [
+		{
+			path: '', component: Today, children: todyChild
+		},{
+			path: '/today', component: Today, children: todyChild
 
 		},{
 			path: '/direct', component: Direct
@@ -89,6 +93,12 @@ export default new VueRouter({
 			path: '/mine', component: Mine
 		},{
 			path:'/details',component:Details
+		},{
+			path:'/special/:id',component:Special
 		}
+
+		// router.redirect({
+		// 	'/':'/today/new'
+		// })
 	]
 })
