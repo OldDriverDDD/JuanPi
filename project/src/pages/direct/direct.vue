@@ -45,6 +45,21 @@
 			<img :src="timeData.pic" alt="">
 		</div>
 		<!-- sort_price -->
+		<div class="sort_price">
+			<ul>
+				<li class="moren">
+					<span></span>
+				</li>
+				<li class="price">
+					<span></span>
+					<i></i>
+					<i></i>
+				</li>
+				<li class="">
+					<span></span>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 

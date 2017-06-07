@@ -4,11 +4,11 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
-<<<<<<< HEAD
-	   	   <span class="search"></span>
-=======
 
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
+	   	   <span class="search"></span>
+
+
+
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
 			<router-link to = "/today/new" class="topbarli" >上新</router-link>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
+
 	
 	export default{
 		data() {
@@ -55,7 +55,7 @@
 	    },
 	   
 	}
-=======
+
 
 import Dress from "./dress"
 	export default{
@@ -86,7 +86,7 @@ import Dress from "./dress"
 		}
 }
 
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
+
 </script>
 
 <style scoped >
@@ -94,10 +94,6 @@ import Dress from "./dress"
 	.logo{
 		width: 100%;
 		height: 1rem;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
 		padding-top:0.3rem;
 		background-color: #fff; 
 	}
