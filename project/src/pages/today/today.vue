@@ -4,6 +4,7 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
+
 	   	   <span class="search"></span>
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
@@ -19,14 +20,15 @@
 		</div>
 
 	   <router-view></router-view>
-	   
+	   <!-- <new></new> -->
 
 	</div>
 </template>
 
 <script>
-	import New from "./new"
-	
+
+	//import New from "./new"
+
 	export default{
 		data() {
 			return {
@@ -48,15 +50,12 @@
 	    },
 		mounted() {
 	      window.addEventListener('scroll', this.scrollBar)
-	    },
-	    components:{
-	    	New
 	    }
+	    // components:{
+	    // 	New
+	    // }
 	   
 	}
-
-
-
 
 
 </script>

@@ -11,6 +11,8 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+// 量贩超市页面
+import Market from '../pages/today/market'
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -62,6 +64,7 @@ import Cate from '../pages/today/cate'
 // export defalut router
 
 export default new VueRouter({
+	mode: 'history',
 	routes: [
 		{
 			path: '', component: Today
@@ -89,6 +92,8 @@ export default new VueRouter({
 			path: '/mine', component: Mine
 		},{
 			path:'/details',component:Details
+		},{
+			path:'/market',component:Market
 		}
 	]
 })
