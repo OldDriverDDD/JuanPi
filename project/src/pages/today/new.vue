@@ -94,15 +94,10 @@
 		width: 100%;
 	    padding: 0.38rem 0;
 	    height: 1.90rem;
-<<<<<<< HEAD
+
 	    background-color: #fff;
 		margin-top: 1.0rem; 
-		    
-		
-		
-=======
 	    background-color: #fff;	
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
 	}
 	.modelBar li{
 			width: 25%;
