@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-     <div class = "tabbar">
-        <router-link to = "/today">今日上新</router-link>
-        <router-link to = "/direct">直发仓</router-link>
-        <router-link to = "/global">全球购</router-link>
-        <router-link to = "/car">购物车</router-link>
-        <router-link to = "/mine">我的</router-link>
+     <div class="tabbar">
+        <li v-for="(item,index) in barInfo" @click="show(item, index)">
+           <img :src="(index == currentIndex) ? item.act_icon : item.bg_icon" alt="" />
+           <p>{{ item.title }}</p>
+        </li>
     </div>
     <router-view></router-view>
   </div>
@@ -16,7 +15,31 @@
 
 export default {
   name: 'app',
- 
+  data() {
+    return {
+      hashData: ['/today','/direct','/global','/car','/mine'],
+      barInfo: null,
+      currentIndex: 0
+    }
+  },
+  methods: {
+    show(item, index) {
+
+      this.$router.push(item.hashValue)
+
+      this.currentIndex = index;
+    }
+  },
+  created() {
+    this.axios.get('/static/data/tapbar.json').then(res => {
+        res.data.menu_list.map((item, i) => {
+          item.hashValue = this.hashData[i]
+        })
+        console.log(res.data.menu_list);
+        this.barInfo = res.data.menu_list;
+
+    })
+  }
 }
 </script>
 
@@ -33,13 +56,25 @@ export default {
       justify-content:space-around;
       background-color: #fff;
       color: gray; 
-      line-height: 147px;
       border-top: 1px solid #f4f4f8;
       z-index: 2;
   }
- #app .tabbar a {
+  #app .tabbar li {
+    list-style: none;
+    height: 147px;
+    text-align: center;
+  }
+  #app .tabbar li img {
+    width: 72px;
+    height: 72px;
+    position: relative;
+    top: -15px;
+  }
+  #app .tabbar p {
     text-decoration: none;
-    font-size: 36px;
+    font-size: 30px;
+    position: relative;
+    top: -33px;
   }
 
 </style>
