@@ -11,8 +11,13 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+<<<<<<< HEAD
 // 量贩超市页面
 import Market from '../pages/today/market'
+=======
+// 搜索页面
+import Search from '../components/search'
+>>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -93,7 +98,11 @@ export default new VueRouter({
 		},{
 			path:'/details',component:Details
 		},{
+<<<<<<< HEAD
 			path:'/market',component:Market
+=======
+			path: '/search',component:Search
+>>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
 		}
 	]
 })
