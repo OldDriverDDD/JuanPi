@@ -11,6 +11,8 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+// 搜索页面
+import Search from '../components/search'
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -89,6 +91,8 @@ export default new VueRouter({
 			path: '/mine', component: Mine
 		},{
 			path:'/details',component:Details
+		},{
+			path: '/search',component:Search
 		}
 	]
 })

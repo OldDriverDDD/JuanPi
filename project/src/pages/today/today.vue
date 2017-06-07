@@ -5,9 +5,9 @@
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
 
-	   	   <span class="search"></span>
+	   	   <router-link to="/search" class="search"></router-link>
 
-
+		
 
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
@@ -21,16 +21,14 @@
 			<router-link to = "/today/beautys" class="topbarli">美妆</router-link>
 			<router-link to = "/today/cate" class="topbarli">美食</router-link>
 		</div>
-
+		
 	   <router-view></router-view>
 	   
 
 	</div>
 </template>
 
-<script>
-
-	
+<script>	
 	export default{
 		data() {
 			return {
@@ -55,37 +53,6 @@
 	    },
 	   
 	}
-
-
-import Dress from "./dress"
-	export default{
-		data(){
-			return {
-				topBanner:"",
-				navBar:[],
-				adsList:[],
-				gtopList:[],
-				data:[]
-			}
-		},
-		created(){
-			this.axios.get('../../../static/data/indexmenu.json').then(res=>{
-				this.data = res.data.menu_list[0].subtab;
-			})
-
-			this.axios.get('../../static/data/lunbo.json').then(res=>{
-				console.log(res.data.module_ads.multi_block[2].data[0].child);
-				this.topBanner = res.data.topbanner.pic_url;
-				this.navBar = res.data.module_ads.multi_block[0].data[0].child;
-				this.adsList =  res.data.module_ads.multi_block[1].data[0].child;
-				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
-			})
-		},
-		components:{
-			Dress
-		}
-}
-
 
 </script>
 
