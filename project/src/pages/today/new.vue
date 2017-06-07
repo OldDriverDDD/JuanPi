@@ -94,7 +94,6 @@
 		width: 100%;
 	    padding: 0.38rem 0;
 	    height: 1.90rem;
-
 	    background-color: #fff;
 		margin-top: 1.0rem; 
 	    background-color: #fff;	

@@ -4,10 +4,11 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
-
-	   	   <span class="search"></span>
-
 			
+
+	   	   <router-link to="/search" class="search"></router-link>
+
+		
 
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
@@ -21,12 +22,13 @@
 			<router-link to = "/today/beautys" class="topbarli">美妆</router-link>
 			<router-link to = "/today/cate" class="topbarli">美食</router-link>
 		</div>
-
+		
 	   <router-view></router-view>
 	   <!-- <new></new> -->
 
 	</div>
 </template>
+
 
 <script>
 	// import New from "./new"
@@ -57,7 +59,6 @@
 	    }
 	   
 	}
-
 
 </script>
 

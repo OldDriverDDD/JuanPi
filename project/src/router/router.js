@@ -11,8 +11,13 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+
 //女装跳转广告页面
 import Special from '../components/special'
+
+// 搜索页面
+import Search from '../components/search'
+
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -95,7 +100,10 @@ export default new VueRouter({
 			path:'/details',component:Details
 		},{
 			path:'/special/:id',component:Special
+		},{
+			path: '/search',component:Search
 		}
+		
 
 		// router.redirect({
 		// 	'/':'/today/new'
