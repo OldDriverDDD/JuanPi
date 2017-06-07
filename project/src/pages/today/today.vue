@@ -4,11 +4,7 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
-<<<<<<< HEAD
 	   	   <span class="search"></span>
-=======
-
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
 			<router-link to = "/today/new" class="topbarli" >上新</router-link>
@@ -29,7 +25,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
+	import New from "./new"
 	
 	export default{
 		data() {
@@ -53,40 +49,16 @@
 		mounted() {
 	      window.addEventListener('scroll', this.scrollBar)
 	    },
+	    components:{
+	    	New
+	    }
 	   
 	}
-=======
 
-import Dress from "./dress"
-	export default{
-		data(){
-			return {
-				topBanner:"",
-				navBar:[],
-				adsList:[],
-				gtopList:[],
-				data:[]
-			}
-		},
-		created(){
-			this.axios.get('../../../static/data/indexmenu.json').then(res=>{
-				this.data = res.data.menu_list[0].subtab;
-			})
 
-			this.axios.get('../../static/data/lunbo.json').then(res=>{
-				console.log(res.data.module_ads.multi_block[2].data[0].child);
-				this.topBanner = res.data.topbanner.pic_url;
-				this.navBar = res.data.module_ads.multi_block[0].data[0].child;
-				this.adsList =  res.data.module_ads.multi_block[1].data[0].child;
-				this.gtopList =  res.data.module_ads.multi_block[2].data[0].child[0];
-			})
-		},
-		components:{
-			Dress
-		}
-}
 
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
+
+
 </script>
 
 <style scoped >
@@ -94,10 +66,6 @@ import Dress from "./dress"
 	.logo{
 		width: 100%;
 		height: 1rem;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c7be5856cbaf9ac2e45b3403d037db432ba9b1d
 		padding-top:0.3rem;
 		background-color: #fff; 
 	}
