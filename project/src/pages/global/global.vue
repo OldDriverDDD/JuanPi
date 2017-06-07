@@ -8,7 +8,7 @@
 			<div class = "first">
 				<div v-for = "item in globalTop">
 					<a href="javascript:;" v-for = "item1 in item.data[0].child">
-						<img :src="item1.pic" alt="">
+						<img :src="item1.pic" >
 					</a>
 				</div>
 			</div>
@@ -16,8 +16,11 @@
 		<ul class = "imgList" >
 			<li class = "listContainer" v-for = "item in globalImg">
 				<a href="javascript:;">
-					<div class = "mark"></div>
-					<img :src="item.shop_cover" class = "img">
+					<router-link :to = "'/adds/'">
+						<div class = "mark"></div>
+						<img :src="item.shop_cover" class = "img" >
+					</router-link>
+					<router-view></router-view>	
 				</a>
 				<div class = "box">
 					<div class = "boxList">
@@ -81,7 +84,7 @@
 	#global .headText{
 		display:block;
 		text-align: center;
-		font-size: 0.54rem;
+		font-size: 54px;
 		color:#333;
 	}
 	#global .headImg{
@@ -92,7 +95,7 @@
 	}
 	#global .headImg:before{
 		content: "\e60c";
-		font-size: 0.72rem;
+		font-size: 72px;
 	}
 	#global .first div:nth-of-type(1),#global .first div:nth-of-type(2),#global .first div:nth-of-type(3),#global .first div:nth-of-type(4),#global .first div:nth-of-type(5){
 		overflow: hidden;
@@ -157,16 +160,16 @@
 		text-align: center;
 	}
 	#global .cprice{
-		font-size: 0.36rem;
+		font-size: 36px;
 		color: #60e;
 	}
 	#global .oprice{
-		font-size: 0.36rem;
+		font-size: 36px;
 		color: #666;
 		text-decoration: line-through;
 	}
 	#global .goodName{
-		font-size: 0.36rem;
+		font-size: 36px;
 		color: #666;
     	white-space: normal;
     	word-break: break-all;

@@ -11,6 +11,7 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
+
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -21,8 +22,8 @@ import Beautys from '../pages/today/beautys'
 import Shoesbag from '../pages/today/shoesBag'
 import House from '../pages/today/house'
 import Cate from '../pages/today/cate'
-
-
+//广告
+import Adds from '../components/adds'
 // 定义路由规则
 // const routes = [
 // 	{
@@ -89,6 +90,9 @@ export default new VueRouter({
 			path: '/mine', component: Mine
 		},{
 			path:'/details',component:Details
+		},{
+			path:'/adds',component:Adds
 		}
+
 	]
 })
