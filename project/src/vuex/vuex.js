@@ -14,6 +14,6 @@ export default new Vuex.Store({
 	
 	},
 	getters: { // 这里的getters相当于就是实例中我们用到的计算属性
-
+		
 	}
 })

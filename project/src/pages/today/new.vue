@@ -11,7 +11,7 @@
 		</ul>
 		<!-- 直发仓，量贩超市，每日抽奖 -->
 		<ul class="adslist">
-			<li v-for = "(item,index) in adsList">
+			<li to = "market" tag = "li" v-for = "(item,index) in adsList" @click = "market(index)">
 				<img :src="item.pic">
 			</li>
 		</ul>	
@@ -66,13 +66,14 @@
 				// console.log(res.data.list);
 				this.goodList = res.data.list
 				
-				console.log(this.goodList)
-
-				 
-
-
+				console.log(this.goodList);
 			})
 		},
+		methods:{
+			market(){
+				this.$router.push('/market/')
+			}
+		}
 		// components:{
 		// 	Dress
 		// }
@@ -81,7 +82,7 @@
 
 </script>
 <style type="text/css">
-	.
+	
 	.bannerBar{
 		width: 100%;
 		
@@ -94,9 +95,12 @@
 		width: 100%;
 	    padding: 0.38rem 0;
 	    height: 1.90rem;
-
 	    background-color: #fff;
 		margin-top: 1.0rem; 
+		    
+		
+		
+
 	    background-color: #fff;	
 	}
 	.modelBar li{

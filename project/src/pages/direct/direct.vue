@@ -45,6 +45,53 @@
 			<img :src="timeData.pic" alt="">
 		</div>
 		<!-- sort_price -->
+		<div class="scroll_nav" :class="{'scrollbar':flag}">
+			<div class="sort_price">
+				<ul>
+					<li class="moren">
+						<span>默认</span>
+					</li>
+					<li class="price">
+						<span>价格</span>
+						<i></i>
+					</li>
+					<li class="sales_volume">
+						<span>销量</span>
+					</li>
+				</ul>
+			</div>
+			<div class="nav">
+				<ul>
+					<li>
+						<span>{{ jxData }}</span>
+					</li><li v-for="item in navData">
+						<span>{{ item.name }}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="zhanwei" :class="{'zhanweigao':flag}"></div>
+		<!-- goods_list -->
+		<div class="goodslist">
+			<ul>
+				<li v-for="item in goodsListData">
+					<div class="img">
+						<img :src="item.pgpicurl" alt="">
+					</div>
+					<div class="price">
+						<span>
+							<i>￥</i>
+							{{+item.tuan_price}}
+						</span>
+						<span>拼</span><span>{{ '￥' + item.oprice }}</span>
+					</div>
+					<div class="title">
+						<span>直发</span>
+						<span>{{ item.title }}</span>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -63,7 +110,12 @@
 				bannerDataFqjn: [],
 				bannerDataFc: [],	//6
 				bannerDataFcn: [],
-				timeData: []
+				timeData: [],
+				jxData: [],	//精选
+				navData: [],
+				goodsListData: [],	//商品列表
+				scroll: '',
+				flag: null
 			}
 		},
 		created(){
@@ -83,15 +135,60 @@
 			},err => {
 				console.log(err);
 			})
+			//nav
+			this.axios.get('../static/data/directNav.json').then(res => {
+				// console.log(res);
+				this.jxData = res.data.default_name;
+				this.navData = res.data.sub_cate_list;
+			},err => {
+				console.log(err);
+			})
+			//good_list
+			this.axios.get('../static/data/directList.json').then(res => {
+				this.goodsListData = res.data.list;
+				//console.log(res.data.list);
+			},err => {
+				console.log(err);
+			})
+		},
+		methods: {
+			scrollBar(){
+				this.scroll = document.body.scrollTop;			//
+                if(this.scroll>3600){
+                    this.flag=true;
+                }else{
+                    this.flag=false;
+                }
+			}
+		},
+		mounted(){
+			window.addEventListener('scroll', this.scrollBar);
 		}
 	}
 </script>
 
 <style>
+	.scrollbar{
+		position: fixed;
+		top: 0;
+		z-index: 10;
+		/*visibility: hidden;*/
+	}
+	.zhanwei{
+		width: 100%;
+		height: 0;
+		position: relative;
+		visibility: hidden;
+		background-color: red;
+	}
+	.zhanweigao{
+		height: 3rem;
+	}
 	#direct{
 		font-family: "微软雅黑";
 		background-color: #f4f4f8;
 		padding-bottom: 148px;
+		overflow: hidden;
 	}
 	@font-face{
 		font-family: "juanPiIco";
@@ -177,5 +274,130 @@
 	}
 	#direct .day_time img{
 		height: 1.59rem;
+	}
+	/*---scroll_nav-----*/
+	#direct .scroll_nav{
+		width: 100%;
+		height: 2.95rem;
+		font-size: 42px;
+	}
+	#direct .sort_price{
+		width: 100%;
+		height: 0.9rem;
+		padding: 0.15rem 0;
+		background: #fff;
+	}
+	#direct .sort_price ul{
+		height: 0.9rem;
+		display: flex;
+	}
+	#direct .sort_price li{
+		width: 4.1rem;
+		text-align: center;
+		line-height: 0.9rem;
+		color: #666;
+	}
+	#direct .sort_price .price{
+		border-left: 1px solid #dedede;
+		border-right: 1px solid #dedede;
+		position: relative;
+	}
+	#direct .sort_price i{
+		display: inline-block;
+		position: relative;
+		width: 0.29rem;
+		height: 0.48rem;
+		background: url(../../../static/directImgs/sort_default.png) no-repeat;
+		background-size: 100%;
+		top: 0.1rem;
+		left: 0.1rem;
+	}
+	#direct .nav{
+		height: 1.75rem;
+		background-color: #f4f4f8;
+	}
+	#direct .nav ul{
+		height: 1.75rem;
+		overflow: hidden;
+		overflow-x: scroll;
+		white-space: nowrap;
+		line-height: 1.75rem;
+		padding-left: 0.74rem;
+	}
+	#direct .nav li{
+		display: inline-block;
+		text-align: center;
+		margin-right: 0.36rem;
+	}
+	#direct .nav span{
+		padding: 0.15rem 0.3rem;
+		border: 1px solid #dbdbdb;
+		color: #333;
+	}
+	#direct .goodslist{
+		background-color: #fff;
+		overflow: hidden;
+		width: 100%;
+	}
+	#direct .goodslist li{
+		display: inline-block;
+		width: 6.17rem;
+		height: 7.9rem;
+		vertical-align: middle;
+	}
+	#direct .goodslist li:nth-child(2n+1){
+		margin: 8px 8px 0 0;
+	}
+	#direct .goodslist li:nth-child(2n){
+		margin: 8px 0 0 0;
+	}
+	#direct .goodslist .img img{
+		height: 6.17rem;
+		display: block;
+	}
+	#direct .goodslist .price{
+		width: 5.71rem;
+		height: 0.72rem;
+		font-size: 45px;
+		line-height: 0.72rem;
+		margin-left: 0.24rem;
+	}
+	#direct .goodslist .price span:nth-child(1){
+		color: #ff464e;
+		word-spacing: -0.23rem;
+		margin-right: 0.18rem;
+	}
+	#direct .goodslist .price span:nth-child(1) i{
+		font-style: normal;
+	}
+	#direct .goodslist .price span:nth-child(2){
+		color: #fff;
+		background-color: #ff464e;
+		display: inline-block;
+		width: 0.45rem;
+	    height: 0.45rem;
+	    text-align: center;
+	    font-size: 40px;
+	    line-height: 0.48rem;
+	    margin-right: 0.19rem;
+	}
+	#direct .goodslist .price span:nth-child(3){
+		color: #bbb;
+		font-size: 33px;
+		text-decoration: line-through;
+	}
+	#direct .goodslist .title{
+		width: 5.96rem;
+		height: 0.6rem;
+		line-height: 0.6rem;
+		margin: 0.06rem 0 0 0.24rem;
+		font-size: 33px;
+	}
+	#direct .goodslist .title span:nth-child(1){
+		display: inline-block;
+		padding: 0 0.15rem;
+		border: 1px solid #ff464e;
+		color: #ff464e;
+		margin-right: 0.15rem;
 	}
 </style>

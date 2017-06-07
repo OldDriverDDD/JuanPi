@@ -5,10 +5,14 @@
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
 
+<<<<<<< HEAD
 	   	   <span class="search"></span>
+=======
+	   	   <router-link to="/search" class="search"></router-link>
 
+		
 
-
+>>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
 			<router-link to = "/today/new" class="topbarli" >上新</router-link>
@@ -21,15 +25,21 @@
 			<router-link to = "/today/beautys" class="topbarli">美妆</router-link>
 			<router-link to = "/today/cate" class="topbarli">美食</router-link>
 		</div>
-
+		
 	   <router-view></router-view>
-	   
+	   <!-- <new></new> -->
 
 	</div>
 </template>
 
+<<<<<<< HEAD
 <script>
-	
+
+	//import New from "./new"
+
+=======
+<script>	
+>>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
 	export default{
 		data() {
 			return {
@@ -51,10 +61,12 @@
 	    },
 		mounted() {
 	      window.addEventListener('scroll', this.scrollBar)
-	    },
+	    }
+	    // components:{
+	    // 	New
+	    // }
 	   
 	}
-
 
 </script>
 
