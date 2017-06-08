@@ -130,6 +130,7 @@
 				// console.log(item)
 				id:JSON.stringify(item),
 				this.$router.push('/special/'+item.title)
+				
 
 			},
 			goTop(){

@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: { // 共享的数据 
-		arr: []
+		arr: [],
+		good: null,
+		addGood: null
 	},
 	mutations: { // 修改数据的唯一途径
 		ADD_GOODSNUM(state, newItem) {
@@ -28,6 +30,12 @@ export default new Vuex.Store({
 			} else {
 				currentGood.count--;
 			}
+		},
+		CHANGEGOOD(state, item) {
+			state.good = item;
+		},
+		ADD_ADSGOOD(state, item) {
+			state.addGood = item;
 		}
 	},
 	actions: { // 异步操作的事件

@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 // 可以让VueRouter在任何组件中使用
 Vue.use(VueRouter)
 // 引入组件
+import Market from '../pages/today/market'
+import Search from '../components/search'
 import Today from '../pages/today/today'
 import Direct from '../pages/direct/direct'
 import Global from '../pages/global/global'
@@ -11,14 +13,8 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
-// 量贩超市页面
-import Market from '../pages/today/market'
-// 搜索页面
-import Search from '../components/search'
-
 //女装跳转广告页面
 import Special from '../components/special'
-
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'

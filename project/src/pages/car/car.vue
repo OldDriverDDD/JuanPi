@@ -1,5 +1,6 @@
 <template>
 	<div id="car">
+	<h2>{{ goods }}</h2>
 		<div class="header">
 			<i class="back" @click="back()"></i>
 			<span>购物车</span>
@@ -67,7 +68,14 @@
 			oneChoice() {
 				console.log(11111);
 			}
+		},
+		computed:{
+			goods(){
+				return this.$store.state.good
+			}
+			
 		}
+
 	}
 </script>
 

@@ -6,13 +6,7 @@
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
 			
 
-
-	   	   
-
 	   	   <router-link to="/search" class="search"></router-link>
-
-		
-
 
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
@@ -32,16 +26,8 @@
 
 	</div>
 </template>
-
-
-
 <script>
 	// import New from "./new"
-
-
-
-	
-
 	export default{
 		data() {
 			return {
