@@ -24,7 +24,8 @@ import Market from '../pages/today/market'
 
 // 搜索页面
 import Search from '../components/search'
-
+//广告页面
+import Newperson from '../pages/today/newperson'
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -99,6 +100,7 @@ import Adds from '../components/adds'
 // 		    ]
 
 export default new VueRouter({
+	mode:"history",
 	routes: [
 		{
 			path: '', component: Today, children: [
@@ -149,6 +151,8 @@ export default new VueRouter({
 			path:'/market',component:Market
 		},{
 			path: '/search',component:Search
+		},{
+			path:'/newperson',component:Newperson
 		}
 
 	]
