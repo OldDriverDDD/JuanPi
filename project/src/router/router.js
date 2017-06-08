@@ -15,6 +15,9 @@ import Mine from '../pages/mine/mine'
 import Details from '../components/details'
 //女装跳转广告页面
 import Special from '../components/special'
+//广告页面
+import Newperson from '../pages/today/newperson'
+
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -90,6 +93,7 @@ import AllOrders from '../pages/mine/allOrders'
 // 		    ]
 
 export default new VueRouter({
+	mode:"history",
 	routes: [
 		{
 			path: '', component: Today, children: [
@@ -138,8 +142,12 @@ export default new VueRouter({
 			path:'/market',component:Market
 		},{
 			path: '/search',component:Search
+		},{
+			path:'/newperson',component:Newperson
+
 		},{ 
 			path:'/allOrders', component: AllOrders 
+
 		}
 	]
 })
