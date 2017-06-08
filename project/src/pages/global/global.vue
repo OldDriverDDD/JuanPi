@@ -14,11 +14,11 @@
 			</div>
 		</div>
 		<ul class = "imgList" >
-			<li class = "listContainer" v-for = "item in globalImg">
+			<li class = "listContainer" v-for = "(item,index) in globalImg">
 				<a href="javascript:;">
 					<router-link :to = "'/adds/'">
 						<div class = "mark"></div>
-						<img :src="item.shop_cover" class = "img" >
+						<img :src="item.shop_cover" class = "img" @click="goAdds(index)">
 					</router-link>
 					<router-view></router-view>	
 				</a>
@@ -64,6 +64,11 @@
 					console.log(res.data.list);
 					this.globalImg = res.data.list;
 				})
+		},
+		methods:{
+			goAdds(index){
+				console.log(this.globalImg[index]);
+			}
 		}
 	}
 </script>
