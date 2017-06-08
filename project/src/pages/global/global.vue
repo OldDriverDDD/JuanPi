@@ -140,6 +140,7 @@
 	#global .img{
 		height: 5.8866rem;
 		display: block;
+		width: 100%;
 	}
 	#global .box{
 		background-color: white;
