@@ -14,7 +14,7 @@
 		<div class="order">
 			我的订单
 			<i class="arrow"></i>
-			<span>全部订单</span>
+			<span @click="toAllOrdrers()">全部订单</span>
 			
 		</div>
 		<div class="afterSale">
@@ -57,13 +57,19 @@
 			<h2>copyright © 武汉奇米网络科技有限公司</h2>
 			<div class="cut-empty"></div>
 		</div>
-
 	</div>
 </template>
 
 <script>
 	export default {
-		name: "mine"
+		name: "mine",
+		methods: {
+			toAllOrdrers() {
+				this.$router.push({
+					path:'/allOrders'
+				})
+			}
+		}
 	}
 </script>
 

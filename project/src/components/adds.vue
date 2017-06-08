@@ -6,7 +6,7 @@
 			</a>
 		</header>
 		<nav>
-			<span class = "first"></span>
+			<span class = "first"  @click = "back()"></span>
 			<span class = "second">童年时光三架马车专场专场</span>
 			<span class = "third"></span>
 		</nav>
@@ -41,14 +41,44 @@
 		</div>
 		<div class = "time">
 			<p class = "timeP1">距离结束还剩</p>
-			<p class = "timeP2">--8<span>天</span>8<span>时</span>8<span>分</span>8<span>秒</span>--</p>
+			<p class = "timeP2">8<span>天</span>8<span>时</span>8<span>分</span>8<span>秒</span></p>
 		</div>
-		<div class = "hotnav" >-- 爆款热卖 --</div>
+		<!-- 爆款热卖 -->
 		<div class = "imgContainer">
-			<div v-for = "item in adds">
+			<div class = "hotnav" >爆款热卖</div>
+			<div v-for = "item in adds" class = "imgDetail">
 				<img :src="item.pgpicurl">
-				<div>{{item.title}}</div>
+				<div class = "imgText">
+					<p><span class = 'tuan'>￥{{item.tuan_price}}</span><span class = "ping">拼</span><span class = "oprice">￥{{item.oprice}}</span></p>
+					<p class = "title">全球购|{{item.title}}</p>
+				</div>
 			</div>
+		</div>
+		<!-- 正在特卖 -->
+		<div class = "special">
+			<div class = "specialnav" >正在特卖</div>
+			<ul class = "specialUl">
+				<li>综合</li>
+				<li>价格</li>
+				<li>销量</li>
+				<li>仅看有货</li>
+			</ul>	
+			<div v-for="item in adds1" class = "imgDetail">
+				<img :src="item.pgpicurl" >
+				<div class = "imgText">
+					<p><span class = 'tuan'>￥{{item.tuan_price}}</span><span class = "ping">拼</span><span class = "oprice">￥{{item.oprice}}</span></p>
+					<p class = "title">全球购|{{item.title}}</p>
+				</div>
+			</div>
+		</div>
+		<div class = "addsBottom">
+			<div class = "search">查看全部商品</div>
+			<div class = "content">亲,已经到底了</div>
+			<ul class = "bottomUl">
+				<li>返回首页</li>
+				<li>客户端</li>
+				<li>电脑版</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -58,14 +88,21 @@
 		name:"adds",
 		data(){
 			return{
-				adds:[]
+				adds:[],
+				adds1:[]
 			}
 		},
 		created(){
 			this.axios.get("../static/data/adds.json").then(res=>{
 				console.log(res.data.data.hot);
 				this.adds = res.data.data.hot;
+				this.adds1 = res.data.data.special;
 			})
+		},
+		methods:{
+			back(){
+				history.back();
+			}
 		}
 	}
 </script>
@@ -203,13 +240,29 @@
 		font-size: 42px;
 		text-align: center;
 	}
+	#adds .timeP2:before{
+		display: inline-block;
+	    content: "";
+	    vertical-align: middle;
+	    width:0.25rem;
+	    height:0.01rem;
+	    background-color: #333;
+	}
+	#adds .timeP2:after{
+		display: inline-block;
+	    content: "";
+	    vertical-align: middle;
+	    width:0.25rem;
+	    height:0.01rem;
+	    background-color: #333;
+	}
 	#adds .timeP2 span{
 		display: inline-block;
 		font-size: 24px;
 		text-align: center;
 		padding: 0 .1rem;
 	}
-	#adds .hotnav{
+	#adds .hotnav,#adds .specialnav{
 		height: 1.44rem;
 		line-height: 1.44rem;
 		background-color:white;
@@ -217,5 +270,113 @@
 		color:#333;
 		text-align: center;
 	}
-
+	#adds .hotnav:before,#adds .specialnav:before{
+		display: inline-block;
+	    content: "";
+	    vertical-align: middle;
+	    width:0.25rem;
+	    height:0.01rem;
+	    background-color: #333;
+	}
+	#adds .hotnav:after,#adds .specialnav:after{
+		display: inline-block;
+	    content: "";
+	    vertical-align: middle;
+	    width:0.25rem;
+	    height:0.01rem;
+	    background-color: #333;
+	}
+	#adds .imgContainer{
+		overflow:hidden;
+		margin-bottom: .3rem;
+	}
+	#adds .imgDetail{
+		float: left;
+		width:49%;
+		margin-top: .2rem;
+	}
+	#adds .imgContainer .imgDetail:nth-child(even){
+		margin-right:.2rem;
+	}
+	#adds .imgDetail img{
+		height: 6.21rem; 
+		width: 100%;
+	}
+	#adds .imgText{
+		background-color: white;
+		padding-bottom: .01rem;
+	}
+	#adds .tuan{
+		font-size:45px;
+		color: #60e;
+		margin-left: 0.24rem;
+		margin-right: 0.12rem;
+	}
+	#adds .ping{
+		font-size:30px;
+		display: inline-block;
+		background-color: #ff464e;
+		color:#fff;
+		padding: 0.05rem;
+	}
+	#adds .oprice{
+		font-size: 33px;
+		color: #bbb;
+		text-decoration: line-through;
+	}
+	#adds .title{
+		font-size: 36px;
+		margin-left: 0.24rem;
+		padding-bottom: .5rem;
+	}
+	#adds .special{
+		overflow:hidden;
+	}
+	#adds .specialUl{
+		height: .9rem;
+		background-color: white;
+		text-align: center;
+		margin-top: .02rem;
+		line-height: .9rem;
+	}
+	#adds .specialUl li{
+		float:left;
+		font-size: 42px;
+		width: 22%;
+	}
+	#adds .special .imgDetail:nth-child(odd){
+		margin-right:.2rem;
+	}
+	#adds .addsBottom{
+		overflow: hidden;
+	}
+	#adds .search{
+		height: 1.44rem;
+		background-color: white;
+		font-size: 42px;
+		text-align: center;
+		line-height: 1.44rem;
+		margin-top: .3rem;
+	}
+	#adds .content{
+		height: 6rem;
+		font-size: .4rem;
+		color:#666;
+		text-align: center;
+		padding-top: .3rem;
+	}
+	#adds .bottomUl{
+		height: 4rem;
+		background-color: white;
+	}
+	#adds .bottomUl li{
+		float: left;
+		color: #666;
+	    font-size: .55rem;
+	    line-height: 2rem;
+	    margin: 0 auto;
+	    width: 31%;
+	    border-right: 1px solid #ebebeb;
+	    text-align: center;
+	}
 </style>

@@ -7,16 +7,63 @@
 		</div>
 		<div class="line"></div>
 		<div class="nameSp">
-		<dl>
-			<dt><img src="../../static/hyimages/juanpi_files/591ea9b9ad0a49f15d8b45d5_180x90.png"></dt>
-			<dd>佣金女装专场</dd>
-			<dd>共89件商品</dd>
-		</dl>
-		<div class="enter">
-			进入专场
-			<span>＞</span>
+			<dl>
+				<dt><img src="../../static/hyimages/juanpi_files/591ea9b9ad0a49f15d8b45d5_180x90.png"></dt>
+				<dd>佣金女装专场</dd>
+				<dd>共89件商品</dd>
+			</dl>
+			<div class="enter">
+				<span class="like"></span>
+				<p>收藏店铺</p>
+			</div>
+		</div>
+		<div class="coupon">
+			<div class="cou">
+				
+			
+				<div class="price"><span>￥</span>5</div>
+				<div class="full">
+					<p>满5元使用</p>
+					<p>仅限当前专场使用</p>
+				</div>
+				<div class="once">
+					<p>立即领取</p>
+				</div>
 		</div>
 	</div>
+	<div class="time">
+		<p class="p1">距离结束还有</p>
+		<p class="p2">- <span>0</span>天<span>23</span>时<span>26</span>分<span>58</span>秒 -</p>
+	</div>
+	<div class="hot">
+		<p>-爆款热卖-</p>
+	</div>
+	<div class="cloths">
+		<dl v-for="item in goods1">
+			<dt @click="goComm(item)"><img :src="item.pic_url"></dt>
+			<dd>
+				<p>￥220.00<span>拼</span><s>{{ item.oprice }}</s></p>
+				<p>{{ item.title }}</p>
+			</dd>
+		</dl>
+	</div>
+	<div class="hot">
+		<p>-正在特卖-</p>
+	</div>
+	<div class="cloths">
+		<dl v-for="item in goods2">
+			<dt @click="goComm(item)"><img :src="item.pic_url"></dt>
+			<dd>
+				<p>￥220.00<span>拼</span><s>{{ item.oprice }}</s></p>
+				<p>{{ item.title }}</p>
+			</dd>
+		</dl>
+	</div>
+	<div class="dis" ref="dd">
+		<p @click="getEle()">5元优惠券，满5元可用</p>
+		<span>立即领取</span>
+	</div>
+
 	</div>
 	
 
@@ -26,16 +73,77 @@
 		name:'special',
 		data(){
 			return{
-				id:this.$route.params
+				id:this.$route.params,
+				goods1:[],
+				goods2:[],
+				scoll :''
 				// console.log(id)
 			}
 		},
 		methods:{
+			goComm(item){
+				this.$router.push('/details/');
+				this.$store.commit('CHANGEGOOD', item);
+				// this.$store.commit({'ADD_GOODSNUM',item})
+			},
+			getEle(){
+				console.log(this.$refs.dd);
+			},
+			retScoll(){
+				this.scoll = document.body.scrollTop;
+				if (this.scoll >200) {
+					this.$refs.dd.style.display = "block";
+				}else{
+					this.$refs.dd.style.display = "none";
+				}
+				// console.log(this.scoll);
 
+			}
+
+		},
+		created(){
+			this.axios.get('../../../static/data/goods.json').then(res=>{
+
+				this.goods1 = res.data.data.hot;
+				console.log(this.goods1);
+				this.goods2 = res.data.data.special;
+			})
+		},
+		// 页面渲染之后 添加绑定事件
+		mounted(){
+			window.addEventListener('scroll',this.retScoll)
 		}
 	}
 </script>
 <style type="text/css">
+	.dis{
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: #fff;
+		font-size:42px; 
+		display: none;
+
+	}
+	.dis p{
+		display: inline-block;
+		padding-top:0.2rem;
+		padding-left: 0.3rem; 
+		padding-bottom: 0.2rem;
+	}
+	.dis span{
+		float: right;
+		border:1px solid red;
+		margin-top:0.3rem;
+		margin-right: 0.3rem; 
+		margin-bottom: 0.2rem;
+		padding-right: 0.1rem;
+		padding-left: 0.1rem;
+
+		color: red;
+
+	}
 	.line{
 		width: 100%;
 		height: 0.3rem;
@@ -83,6 +191,7 @@
 		box-sizing:border-box;
 		font-size: 0.42rem;
 		background-color: #fff;
+		position: relative;
 
 	}
 	.nameSp dl{
@@ -126,23 +235,158 @@
 	}
 	.enter{
 		float: right;
+		margin-right: 0.25rem;
 		position: relative;
-		top: 0.18rem;
+		top: -0.1rem;
 		line-height: 1;
 		vertical-align: middle;
 		display: inline-block;
 		padding-left: 0.3rem;
 		padding-top: 0.25rem;
 		padding-bottom: 0.25rem;
-		border:1px solid #4a4a4a;
 		color: #666;
 		font-size: 0.33rem;
+		text-align: center;
 
 
 	}
-	.enter span{
-		float: right;
+	.enter p{
+		padding-top: 0.2rem;
+	}
+	.like{
+		font-size: 0.7rem;
+		font-family: "juanPiIco";
+
+
+
+	}
+	.like:before{
+		content: "\e612";
+		
+	}
+	/*优惠券*/
+	.coupon{
+		width: 100%;
+		box-sizing:border-box;
+		background-color: #fff;
+
+		
+		
+	}
+	.cou{
+		width: 11.06rem;
+		height: 2.16rem;
+		/*padding-right: 0.42rem;*/
+		/*padding-left: 0.42rem;*/
+		background: url(../../static/hyimages/juanpi_files/coupon_bg.png)no-repeat;
+		background-size: 100%;
+		display: flex;
+		font-size: 0.36rem; 
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
+	.cou div{
+		display: inline-block;
+		vertical-align: middle;
+		box-sizing: border-box;
+	}
+	.cou .price{
+		width: 3.3rem;
+		height: 2.16rem;
+		line-height: 1.8rem;
+		text-align: center;
+		font-size: 108px;
+		color: #333;
+	}
+	.cou .price span:first-child{
+		font-size: 48px;
+		color: #333;
+	}
+	.cou .full{
+		width: 3.84rem;
+		height: 2.16rem;
+		font-size: 36px;
+		box-sizing: border-box;
+		padding-top: 0.68rem;
+	}
+	.cou .full p{
+		line-height: 0.4rem;
+		color: #666;
+	}
+	.cou .once{
+		width: 3.84rem;
+		height: 2.16rem;
+		box-sizing: border-box;
+		padding-top: 0.8rem;
+		text-align: center;
+	}
+	.cou .once p{
+		display: inline-block;
+		line-height: 0.75rem;
+		padding: 0 0.38rem;
+		font-size: 42px;
+		background-color: #ff464e;
+		color: #fff;
+	}
+	.time{
+		width: 100%;
+		text-align: center;
+		padding-top: 0.3rem;
+	}
+	.p1{
+		font-size: 30px;
+
+	}
+	.p2{
+		font-size: 30px;
+		padding-bottom: 0.3rem;
+	}
+	.p2 span{
+		font-size: 42px;
+	}
+	.hot{
+		width: 100%;
+		text-align: center;
+		background-color: #fff;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+	.hot p{
+		font-size: 42px;
+	}
+	.cloths{
+		width: 100%;
+	}
+	.cloths dl{
+		width: 50%;
+		font-size: 36px;
+		display: inline-block;
+	}
+	.cloths dl dt{
+		width: 100%;
+	}
+	.cloths dl dt img{
+		width: 100%;
+	}
+	.cloths dl dd {
+		padding-left: 0.2rem;
+	}
+	.cloths dl dd p:first-child{
+		color: red;
+	}
+	.cloths dl dd p:first-child span{
+		font-size: 0.3rem;
+		background-color: red;
+		color: #fff;
+		padding: 0.03rem;
+		margin-left: 0.1rem;
 		margin-right: 0.1rem;
-		margin-left: 0.3rem;
+	}
+	.cloths dl dd p:first-child s{
+		font-size: 30px;
+		color: #999;
+	}
+	.cloths dl dd p:last-child{
+		padding-top: 0.1rem;
 	}
 </style>
