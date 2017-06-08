@@ -15,6 +15,19 @@ import Details from '../components/details'
 import Market from '../pages/today/market'
 // 搜索页面
 import Search from '../components/search'
+
+//女装跳转广告页面
+import Special from '../components/special'
+
+// // 搜索页面
+// import Search from '../components/search'
+
+
+// 量贩超市页面
+import Market from '../pages/today/market'
+
+// 搜索页面
+import Search from '../components/search'
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -65,13 +78,48 @@ import Adds from '../components/adds'
 
 // export defalut router
 
+
+
+
+// export default new VueRouter({
+// 	mode: 'history',
+// 	routes: [
+// 		{
+// 			path: '', component: Today
+// 		},{
+// 			path: '/today', component: Today, children: [
+
+// 		        { path: '', component: New },
+// 		        { path: 'new', component: New },
+// 		        { path: 'dress', component: Dress },
+// 		        { path: 'shoesBag', component: Shoesbag },
+// 		        { path: 'mother', component: Mother },
+// 		        { path: 'shuma', component: Shuma },
+// 		        { path: 'house', component: House },
+// 		        { path: 'man', component: Man },
+// 		        { path: 'beautys', component: Beautys },
+// 		        { path: 'cate', component: Cate }
+// 		    ]
+
 export default new VueRouter({
-	mode: 'history',
 	routes: [
 		{
-			path: '', component: Today
+			path: '', component: Today, children: [
+
+		        { path: '', component: New },
+		        { path: 'new', component: New },
+		        { path: 'dress', component: Dress },
+		        { path: 'shoesBag', component: Shoesbag },
+		        { path: 'mother', component: Mother },
+		        { path: 'shuma', component: Shuma },
+		        { path: 'house', component: House },
+		        { path: 'man', component: Man },
+		        { path: 'beautys', component: Beautys },
+		        { path: 'cate', component: Cate }
+		    ]
 		},{
-			path: '/today', component: Today, children: [
+			path: '/today', component: Today, children:[
+
 		        { path: '', component: New },
 		        { path: 'new', component: New },
 		        { path: 'dress', component: Dress },
@@ -95,6 +143,13 @@ export default new VueRouter({
 		},{
 			path:'/details',component:Details
 		},{
+<<<<<<< HEAD
+=======
+
+			path:'/special/:id',component:Special
+		},{
+
+>>>>>>> 8403b5ac5fe574d68f4bc33f45b71e79b3c8dc43
 			path:'/adds',component:Adds
 		},{
 			path:'/market',component:Market

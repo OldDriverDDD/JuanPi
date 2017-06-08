@@ -4,18 +4,19 @@
 		<!-- logo -->
 		<div class="logo">
 	   	   <img src="../../../static/hyimages/top-logo.png" class="logoImg">
+			
 
-<<<<<<< HEAD
-	   	   <span class="search"></span>
-=======
+
+	   	   
+
 	   	   <router-link to="/search" class="search"></router-link>
 
 		
 
->>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
+
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
-			<router-link to = "/today/new" class="topbarli" >上新</router-link>
+			<router-link to = "/today/new" class="topbarli nn">上新</router-link>
 			<router-link to = "/today/dress" class="topbarli">女装</router-link>
 			<router-link to = "/today/shoesBag" class="topbarli">鞋包</router-link>
 			<router-link to = "/today/mother" class="topbarli">母婴</router-link>
@@ -32,14 +33,15 @@
 	</div>
 </template>
 
-<<<<<<< HEAD
+
+
 <script>
+	// import New from "./new"
 
-	//import New from "./new"
 
-=======
-<script>	
->>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
+
+	
+
 	export default{
 		data() {
 			return {
@@ -61,12 +63,19 @@
 	    },
 		mounted() {
 	      window.addEventListener('scroll', this.scrollBar)
+
+	    },
+	    components:{
+	    	// New
+	    }
+
 	    }
 	    // components:{
 	    // 	New
 	    // }
+
 	   
-	}
+	
 
 </script>
 
@@ -108,12 +117,14 @@
 		background-color: #fff;
 		
 	}
+	.nn{
+		color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;
+	}
 	#today .topbarli:hover{
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
 	}
-
-
 	.search{
 		font-family: "juanPiIco";
 		font-size: 0.7rem;
