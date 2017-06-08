@@ -1,5 +1,6 @@
 <template>
 	<div id="car">
+	<h2>{{ goods }}</h2>
 		<div class="header">
 			<i class="back" @click="back()"></i>
 			<span>购物车</span>
@@ -7,7 +8,7 @@
 		</div>
 		<ul>
 			<li>
-				<i class="singleChoice"></i>
+				<i class="singleChoice" @click="oneChoice()"></i>
 				<img src="" alt="">
 				<div class="size">
 					<p>气质包臀条纹连衣裙</p>
@@ -24,7 +25,7 @@
 				</div>
 			</li>
 			<li>
-				<i class="singleChoice"></i>
+				<i class="singleChoice" @click="oneChoice()"></i>
 				<img src="" alt="">
 				<div class="size">
 					<p>韩版紧身显瘦高腰短裤</p>
@@ -63,8 +64,18 @@
 		methods: {
 			back() {
 				history.back();
+			},
+			oneChoice() {
+				console.log(11111);
 			}
+		},
+		computed:{
+			goods(){
+				return this.$store.state.good
+			}
+			
 		}
+
 	}
 </script>
 

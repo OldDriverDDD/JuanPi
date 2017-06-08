@@ -1,6 +1,11 @@
 <template>
 <div id="details">
-
+	<!-- <h2>{{ comms }}</h2> -->
+	<div>
+		<span>-</span>
+		<span>0</span>
+		<span @click="toCar()">+</span>
+	</div>
 	<div class="imgs">
 		<img src="../../static/hyimages/juanpi_files/h.jpg">
 	</div>
@@ -111,7 +116,7 @@
 				<p>￥69.80</p>
 				<p>单独购买</p>
 			</div>
-			<div class="teamBuy">
+			<div class="teamBuy" @click="goCart()">
 				<p>￥59.80</p>
 				<p>立即开团<span>2人成团</span></p>
 			</div>
@@ -128,14 +133,26 @@
 		name:"details",
 		data(){
 			return {
-				//接受路由的数据
-				id:this.$route.params
-
 
 			}
 		},
+		methods:{
+			goCart(item){
+				this.$router.push('/car/')
+			},
+			toCar() {
+				this.$store.commit('ADD_GOODSNUM', this.comms);
+				console.log(this.$store.state.arr);
+			}	
+		},
+		computed:{
+			comms(){
+				return this.$store.state.good
+				// console.log(this.item);
+			}
+		},
 		mounted() {
-			// console.log(this.id)
+			console.log(this.comms);
 		}
 
 		
@@ -162,6 +179,7 @@
 		height: 100%;
 		text-align: center;
 		padding-top: 0.15rem;
+		/*display: flex;*/
 	}
 	.bar img{
 		width: 0.72rem;
@@ -206,6 +224,8 @@
 		background-color: #ff464e;
 		box-sizing: border-box;
 		padding-top: 0.13rem;
+		z-index: 11;
+		float: right;
 	}
 	.buy .teamBuy p:first-child{
 		height: 0.60rem;
