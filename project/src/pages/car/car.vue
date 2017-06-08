@@ -7,7 +7,7 @@
 		</div>
 		<ul>
 			<li>
-				<i class="singleChoice"></i>
+				<i class="singleChoice" @click="oneChoice()"></i>
 				<img src="" alt="">
 				<div class="size">
 					<p>气质包臀条纹连衣裙</p>
@@ -24,7 +24,7 @@
 				</div>
 			</li>
 			<li>
-				<i class="singleChoice"></i>
+				<i class="singleChoice" @click="oneChoice()"></i>
 				<img src="" alt="">
 				<div class="size">
 					<p>韩版紧身显瘦高腰短裤</p>
@@ -63,6 +63,9 @@
 		methods: {
 			back() {
 				history.back();
+			},
+			oneChoice() {
+				console.log(11111);
 			}
 		}
 	}
