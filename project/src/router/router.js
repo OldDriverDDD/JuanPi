@@ -11,17 +11,10 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 // 量贩超市页面
 import Market from '../pages/today/market'
-=======
 // 搜索页面
 import Search from '../components/search'
->>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
->>>>>>> 3a10b47870ca81bbf4b4dca92ce61e1375fd5d5e
 // today二级路由
 import New from '../pages/today/new'
 import Dress from '../pages/today/dress'
@@ -85,9 +78,9 @@ export default new VueRouter({
 		        { path: 'shoesBag', component: Shoesbag },
 		        { path: 'mother', component: Mother },
 		        { path: 'shuma', component: Shuma },
-		         { path: 'house', component: House },
+		        { path: 'house', component: House },
 		        { path: 'man', component: Man },
-		         { path: 'beautys', component: Beautys },
+		        { path: 'beautys', component: Beautys },
 		        { path: 'cate', component: Cate }
 		    ]
 
@@ -102,16 +95,11 @@ export default new VueRouter({
 		},{
 			path:'/details',component:Details
 		},{
-<<<<<<< HEAD
 			path:'/adds',component:Adds
-=======
-<<<<<<< HEAD
+		},{
 			path:'/market',component:Market
-=======
+		},{
 			path: '/search',component:Search
->>>>>>> 6d1ce6b27ff44e4cab95d8dd8f31e6b79f8f93b8
->>>>>>> 3a10b47870ca81bbf4b4dca92ce61e1375fd5d5e
 		}
-
 	]
 })
