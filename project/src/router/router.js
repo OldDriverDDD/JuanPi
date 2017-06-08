@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 // 可以让VueRouter在任何组件中使用
 Vue.use(VueRouter)
 // 引入组件
+import Market from '../pages/today/market'
+import Search from '../components/search'
 import Today from '../pages/today/today'
 import Direct from '../pages/direct/direct'
 import Global from '../pages/global/global'
