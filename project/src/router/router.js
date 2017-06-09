@@ -13,11 +13,10 @@ import Car from '../pages/car/car'
 import Mine from '../pages/mine/mine'
 // 商品详情页面
 import Details from '../components/details'
-
-
-
 //女装跳转广告页面
 import Special from '../components/special'
+//广告页面
+import Newperson from '../pages/today/newperson'
 
 // today二级路由
 import New from '../pages/today/new'
@@ -31,6 +30,7 @@ import House from '../pages/today/house'
 import Cate from '../pages/today/cate'
 //广告
 import Adds from '../components/adds'
+import AllOrders from '../pages/mine/allOrders'
 // 定义路由规则
 // const routes = [
 // 	{
@@ -142,6 +142,12 @@ export default new VueRouter({
 			path:'/market',component:Market
 		},{
 			path: '/search',component:Search
+		},{
+			path:'/newperson',component:Newperson
+
+		},{ 
+			path:'/allOrders', component: AllOrders 
+
 		}
 	]
 })

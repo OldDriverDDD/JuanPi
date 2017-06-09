@@ -12,7 +12,9 @@ Vue.prototype.axios = axios
 import store from './vuex/vuex'
 // 重置样式表引进来
 import './assets/css/reset.css'
-
+//配置swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

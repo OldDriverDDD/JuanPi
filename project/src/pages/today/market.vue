@@ -10,11 +10,12 @@
 			</li>
 			
 		</ul>
-		<div class="marketCon" v-for = "(item,index) in market" :style = "{ marginTop:'2.0rem'}">
-			<img :src = "item.img" :id="index">
+		<div class="marketCon" v-for = "(item,index) in market" >
+			<!-- <div  class = "empty" :style = "{'height':value}"></div> -->
+			<img :src = "item.img" :id="index" >
 			
 			<ul>
-				<li class="markeList" v-for = "a in item.goodsList">
+				<li class="markeList" v-for = "a in item.goodsList" >
 					<img :src="a.r2">
 					
 					<p class="goodInfo">{{ a.q }}</p>
@@ -46,13 +47,16 @@
 				goodlist:[],
 				scroll:'',
 				flag:null,
-				currentIndex:0
+				currentIndex:0,
+				value:0+"px",
+				scrollFlag: true
+				
 				
 			}
 		},
 		created(){
 			this.axios.get('../../static/data/market.json').then(res=>{
-				console.log(res.data.data['1661458']);
+				console.log(res.data.data);
 				this.market = res.data.data['1661458'];
 			});
 		},
@@ -67,10 +71,12 @@
 
 	      },
 	      rotate(index){
-	      	console.log(index);
 	      	this.currentIndex = index;
-	      	
+	      	setTimeout(function () {
+	      		document.body.scrollTop -= 120;
+	      	}, 0)
 	      }
+	      
 		},
 		mounted() {
 	      window.addEventListener('scroll', this.scrollBar)
@@ -222,7 +228,9 @@
 	.navColor{
 		background-color: hsl(185, 88%, 26%);
 	}
+	.empty{
 
+	}
 
 
 
