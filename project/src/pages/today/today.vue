@@ -10,7 +10,7 @@
 
 	   </div>
 	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
-			<router-link to = "/today/new" class="topbarli nn">上新</router-link>
+			<router-link to = "/today/new" class="topbarli">上新</router-link>
 			<router-link to = "/today/dress" class="topbarli">女装</router-link>
 			<router-link to = "/today/shoesBag" class="topbarli">鞋包</router-link>
 			<router-link to = "/today/mother" class="topbarli">母婴</router-link>
@@ -22,44 +22,41 @@
 		</div>
 		
 	   <router-view></router-view>
-	   <!-- <new></new> -->
+	   
 
 	</div>
 </template>
 <script>
 	// import New from "./new"
 	export default{
-		data() {
-			return {
-				scroll:'',
-				flag:null
-			}
-		},
-		methods: {
-	      scrollBar() {
-	        this.scroll = document.body.scrollTop;
-	        if(this.scroll>0){
-	        	this.flag = true;
-	        }else{
-	        	this.flag = false;
-	        }
+			data() {
+				return {
+					scroll:'',
+					flag:null,
+					changColor:1
+				}
+			},
+			methods: {
+		      scrollBar() {
+		        this.scroll = document.body.scrollTop;
+		        if(this.scroll>0){
+		        	this.flag = true;
+		        }else{
+		        	this.flag = false;
+		        }
 
-	      },
+		      },
 
-	    },
-		mounted() {
-	      window.addEventListener('scroll', this.scrollBar)
+		    },
+			mounted() {
+		      window.addEventListener('scroll', this.scrollBar)
 
-	    },
-	    components:{
-	    	// New
-	    }
+		    },
+		    components:{
+		    	
+		    }
 
-	    }
-	    // components:{
-	    // 	New
-	    // }
-
+	  }
 	   
 	
 
@@ -103,14 +100,14 @@
 		background-color: #fff;
 		
 	}
-	.nn{
+/*	.nn{
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
 	}
 	#today .topbarli:hover{
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
-	}
+	}*/
 	.search{
 		font-family: "juanPiIco";
 		font-size: 0.7rem;
@@ -124,6 +121,10 @@
 		position: fixed;
 		top: 0;
 
+	}
+	.clickStyle{
+		color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;
 	}
 	.router-link-active{
 		color: #ff464e;

@@ -96,7 +96,7 @@
 			goComm(item){
 				this.$router.push('/details/');
 				this.$store.commit('CHANGEGOOD', item);
-				// this.$store.commit({'ADD_GOODSNUM',item})
+				// this.$store.commit('ADD_GOODSNUM',item)
 			},
 			getEle(){
 				console.log(this.$refs.dd);

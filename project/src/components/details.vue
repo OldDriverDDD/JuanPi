@@ -111,15 +111,19 @@
 				<p>￥69.80</p>
 				<p>单独购买</p>
 			</div>
-			<div class="teamBuy" @click="goCart()">
+			<div class="teamBuy" @click="showDiv()">
 				<p>￥59.80</p>
 				<p>立即开团<span>2人成团</span></p>
 			</div>
 		</div>
 		
 	</div>
-	<div class="shopping">
+	<div>
+		
+	
+	<div class="shopping" ref="shoppings">
 		<img :src="comms.pic_url">
+		<span class="close" @click="clo()">X</span>
 		<div class="minPrice">
 			<p>￥{{ comms.oprice }}</p>
 			<p>请选择颜色 尺码</p>
@@ -129,21 +133,30 @@
 			<p class="flower">花色</p>
 			<p class="cAnds">尺码</p>
 			<div class="sizeChange">
-				<span>S</span>
-				<span>M</span>
-				<span>L</span>
-				<span>XL</span>
-				<span>XXL</span>
+			<ul>
+				<li>S</li>
+				<li>M</li>
+				<li>L</li>
+				<li>XL</li>
+				<li>XXL</li>
+			</ul>
+				
 			</div>
 			<div class="buyNum">
-				<span>购买数量</span>
-				<div class="numChange">
-					 <span class="reduce">-</span>
-					 <span class="num">0</span>
-					 <span class="add">+</span>
+				<span class="shopp">购买数量</span>
+				<div class="numChange" >
+					 <span class="reduce" @click="reduce()">-</span>
+					 <span class="num">{{ comms.count }}</span>
+					 <span class="add" @click="toCar()">+</span>
 				</div>
 			</div>
+			<div class="joinCart">
+				<span>立即开团</span>
+				<span @click="goCart()">加入购物车</span>
+			</div>
 		</div>
+		<div></div>
+	 </div>
 	</div>
 </div>
 	
@@ -165,22 +178,42 @@
 			toCar() {
 				this.$store.commit('ADD_GOODSNUM', this.comms);
 				console.log(this.$store.state.arr);
+			},
+			reduce(){
+				this.$store.commit('REDUCE_GOODSNUM', this.comms)
+			},
+			clo(){
+				this.$refs.shoppings.style.display="none"
+			},
+			showDiv(){
+				this.$refs.shoppings.style.display="block";
+				
 			}	
 		},
 		computed:{
 			comms(){
-				return this.$store.state.good
+				return this.$store.state.good;
 				// console.log(this.item);
 			}
 		},
+		created() {
+			console.log(this.comms)
+			this.$store.commit('ADD_GOODSNUM', this.comms);
+		},
 		mounted() {
-			console.log(this.comms);
+			// console.log(this.comms);
 		}
 
 		
 	}
 </script>
 <style type="text/css" scoped>
+    .allDiv{
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(0,0,0,0.7);
+    	display: block;
+    }
 	/*购物车小页面*/
 	.shopping{
 		width: 100%;
@@ -189,6 +222,14 @@
 		bottom:0;
 		height: 12.0rem;
 		padding-left: 0.42rem;
+		/*z-index: 1000;*/
+		display: none;
+	}
+	.close{
+		float: right;
+		font-size: 0.6rem;
+		margin-right: 1rem;
+		color: #666;
 	}
 	.shopping>img{
 		position: absolute;
@@ -219,8 +260,85 @@
 		background-color:#ff464e;
 		height: 0.96rem;
 		width: 30%;
-		line-height: 0.1px;
+		line-height: 0.9rem;
 		text-align: center; 
+	}
+
+	.sizeChange{
+		font-size: 50px;
+		width: 100%;
+		overflow: hidden;
+	}
+	.sizeChange ul{
+		width: 100%;
+		/*display: flex;*/
+	}
+	.sizeChange ul li{
+		width: 30%;
+		margin-top: 0.18rem;
+		height: 0.96rem;
+		line-height: 0.96rem;
+		display: block;
+		text-align: center;
+		/*overflow: hidd*/
+		color: #333;
+		border: 1px solid #333;
+		align-item:center;
+		float: left;
+		margin-right: 0.2rem;
+	}
+	.buyNum{
+		width:100%;
+		font-size: 50px;
+		margin-top: 0.3rem;
+		
+	}
+	.shopp{
+		float: left;
+	}
+	.numChange{
+		float: right;
+		margin-right: .8rem;
+	}
+	.numChange .reduce{
+		color: red;
+		width: 0.6rem;
+		height: 0.6rem;
+		display: inline-block;
+		border: 1px solid #333;
+		line-height: 0.6rem;
+		background-color: #f7f7f7;
+		text-align: center;
+		margin-right: 0.1rem;
+	}
+	.add{
+		color: red;
+		width: 0.6rem;
+		height: 0.6rem;
+		display: inline-block;
+		border: 1px solid #333;
+		line-height: 0.6rem;
+		background-color: #f7f7f7;
+		text-align: center;
+		margin-left: 0.1rem;
+	}
+	.joinCart{
+		width: 100%;
+		clear: both;
+		padding-top: 0.4rem;
+
+	}
+	.joinCart span{
+		font-size: 60px;
+		color: #fff;
+		background-color: #ff464e;
+		width: 45%;
+		display: inline-block;
+		margin-right: 0.2rem;
+		text-align: center;
+		padding-top:0.1rem;
+		padding-bottom: 0.1rem;
+		border-radius: 0.1rem; 
 	}
 
 

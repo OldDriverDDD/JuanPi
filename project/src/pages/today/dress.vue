@@ -170,6 +170,9 @@
 		background-color: #fff;
 
 	}
+	.kindClass:nth-of-type(1){
+		/*padding-top: 0.9rem;*/
+	}
 	.kindClass div{
 		width: 100%;
 		height: 3rem;

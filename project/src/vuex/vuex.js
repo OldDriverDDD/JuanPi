@@ -18,21 +18,29 @@ export default new Vuex.Store({
 			state.arr.map(function(item){
 				if(newItem.title == item.title) {
 					item.count++;
+					console.log('add')
 					flag = true;
 				}
 			});
 			if(flag == false) {
-				newItem.count = 1;
+				console.log('first add')
+				// newItem.count = 1;
+				Vue.set(newItem, 'count', 1);
 				state.arr.push(newItem);
 			}
+			console.log(state.arr)
 		},
-		REDUCE_GOODSNUM(state, index) {
-			var currentGood = state.arr[index];
-			if (currentGood.count == 1) {
-				state.arr[index].splice(index,1);
-			} else {
-				currentGood.count--;
-			}
+		REDUCE_GOODSNUM(state, item) {
+			state.arr.map(function(a, i) {
+				if (item.title == a.title) {
+					a != item && item.count--;
+					a.count--;
+					if (a.count == 1) {
+						state.arr.splice(i, 1);
+					}
+				} 
+			})
+			
 		},
 		CHANGEGOOD(state, item) {
 			state.good = item;
@@ -44,7 +52,21 @@ export default new Vuex.Store({
 	actions: { // 异步操作的事件
 	
 	},
-	getters: { // 这里的getters相当于就是实例中我们用到的计算属性
-		
+	getters: { 
+		// 这里的getters相当于就是实例中我们用到的计算属性
+		allPrice(state) {
+			let money = 0;
+			state.arr.map(item => {
+				money += item.count * parseFloat(item.tuan_price);
+			});
+			return money;
+		},
+		goodsCount(state) {
+			let allCount = 0;
+			state.arr.map(item => {
+				allCount += item.count;
+			});
+			return allCount;
+		}
 	}
 })
