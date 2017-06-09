@@ -93,6 +93,7 @@ import Adds from '../components/adds'
 // 		    ]
 
 export default new VueRouter({
+	mode: 'history',
 	routes: [
 		{
 			path: '', component: Today, children: [

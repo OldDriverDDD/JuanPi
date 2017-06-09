@@ -1,25 +1,19 @@
 <template>
 <div id="details">
-	<!-- <h2>{{ comms }}</h2> -->
-	<div>
-		<span>-</span>
-		<span>0</span>
-		<span @click="toCar()">+</span>
-	</div>
 	<div class="imgs">
-		<img src="../../static/hyimages/juanpi_files/h.jpg">
+		<img :src="comms.pic_url">
 	</div>
 	<div class="price">
 		<div class="priTop">
 			<div class="p1">
-				<span class="priceT"><i>￥</i>43.90</span>
-				<s>￥100.00</s>
+				<span class="priceT"><i>￥</i>{{ comms.tuan_price}}</span>
+				<s>￥{{ comms.oprice}}</s>
 				<span class="post">包邮</span>
 				<span class="post">拼团价</span>
 				<span class="group">1891已团</span>
 			</div>
 			<div class="p2">
-				<a href="##">泡泡袖松紧娃娃衬衫</a>
+				<a href="##">{{ comms.title }}</a>
 			</div>
 			<p class="p3">
 				<a href="##"><img src="" />24小时发货</a>
@@ -31,14 +25,15 @@
 	<!-- 线 -->
 	<div class="line"></div>
 	<div class="team">
-		<p class="addT">可直接参加TA们的团</p>
+		<!-- <p class="addT">可直接参加TA们的团</p> -->
 		<div class="city">
 			<dl>
 				<dt><img src="../../static/hyimages/juanpi_files/46.jpg"></dt>
 				<dd>温暖</dd>
 				<dd>朝阳市</dd>
 			</dl>
-		</div>
+		</div> 
+	
 		<div class="goAdd">
 			<dl>
 				<dd>还差<i>1</i>人成团</dd>
@@ -123,6 +118,33 @@
 		</div>
 		
 	</div>
+	<div class="shopping">
+		<img :src="comms.pic_url">
+		<div class="minPrice">
+			<p>￥{{ comms.oprice }}</p>
+			<p>请选择颜色 尺码</p>
+		</div>
+		<div class="Csize">
+			<p class="cAnds">颜色</p>
+			<p class="flower">花色</p>
+			<p class="cAnds">尺码</p>
+			<div class="sizeChange">
+				<span>S</span>
+				<span>M</span>
+				<span>L</span>
+				<span>XL</span>
+				<span>XXL</span>
+			</div>
+			<div class="buyNum">
+				<span>购买数量</span>
+				<div class="numChange">
+					 <span class="reduce">-</span>
+					 <span class="num">0</span>
+					 <span class="add">+</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 	
 	
@@ -159,6 +181,50 @@
 	}
 </script>
 <style type="text/css" scoped>
+	/*购物车小页面*/
+	.shopping{
+		width: 100%;
+		position: relative;
+		background-color:#fff; 
+		bottom:0;
+		height: 12.0rem;
+		padding-left: 0.42rem;
+	}
+	.shopping>img{
+		position: absolute;
+		top: -1.2rem;
+		width: 3.0rem;
+	}
+	.minPrice{
+		margin-left: 3.6rem;
+		display: inline-block;
+		vertical-align: top;
+		font-size: 42px;
+		line-height: 0.8rem;
+	}
+	.minPrice p:first-child{
+		color: red;
+		font-size: 0.66rem;
+	}
+	.Csize{
+		width:100%;
+	}
+	.cAnds{
+		margin: 0.3rem 0 0.3rem 0;
+		font-size: 50px;
+	}
+	.flower{
+		font-size: 42px;
+		color: #fff;
+		background-color:#ff464e;
+		height: 0.96rem;
+		width: 30%;
+		line-height: 0.1px;
+		text-align: center; 
+	}
+
+
+	/*底部的菜单*/
 	.bottomBar{
 		width: 100%;
 		position: fixed;
@@ -257,23 +323,30 @@
 
 	#details{
 		background: #fff;
+		overflow: hidden;
 	}
 	.imgs{
 		width: 100%;
 		background-color: #fff;
+		overflow: hidden;
 	}
 	.imgs img{
 		width: 100%;
 		float: left;
+
 	}
 	/*价格显示*/
 	.price{
 		width: 100%;
 		background-color: #fff;
+		overflow: hidden;
+		height: 3.5rem;
 
 	}
 	.priTop{
 		width: 100%;
+		overflow: hidden;
+
 	}
 	.p1{
 		background-color: #fff;
@@ -296,6 +369,8 @@
 		font-size: 0.66rem;
 		color: #ff464e;
 		vertical-align: middle;
+		overflow: hidden;
+
 
 	}
 	.p1 s{
@@ -388,6 +463,7 @@
 		box-sizing:border-box;
 		padding-left: 0.42rem;
 		padding-right: 0.42rem;
+		overflow: hidden;
 	}
 	.addT{
 		font-size: 0.42rem;
@@ -404,7 +480,9 @@
 
 	}
 	.city dl{
+		overflow: hidden;
 		width: 100%;
+		padding-top: 0.1rem;
 	}
 	.city dl dt{
 		float: left;
@@ -431,9 +509,11 @@
 		color: #999;
 		position: relative;
 
+
 	}
 	.goAdd dl{
 		width: 100%;
+		padding-top: 0.25rem;
 
 	}
 	.goAdd dl dt{
@@ -443,7 +523,7 @@
 		text-align: center;
 		color: #ff464e;
 		position: absolute;
-		top: 0.2rem;
+		top: 0.5rem;
 		right: 0;
 		border:1px solid;
 	}

@@ -8,6 +8,9 @@ export default new Vuex.Store({
 		arr: [],
 		good: null,
 		addGood: null
+
+
+
 	},
 	mutations: { // 修改数据的唯一途径
 		ADD_GOODSNUM(state, newItem) {
