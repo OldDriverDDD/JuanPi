@@ -2,7 +2,7 @@
 	<div id="special">
 		<div class="topMU">
 		<span class="resver" @click="backs()"></span>
-			<p>{{ getItem.title }}</p>
+			<p>{{ $router.params }}</p>
 		<span class="dot"></span>
 		</div>
 		<div class="line"></div>
@@ -156,6 +156,7 @@
 				console.log(this.goods1);
 				this.goods2 = res.data.data.special;
 			})
+		
 		},
 		// 页面渲染之后 添加绑定事件
 		mounted(){
@@ -163,9 +164,9 @@
 
 		},
 		computed:{
-			getItem(){
-				return this.$store.state.addGood
-			}
+			// getItem(){
+			// 	return this.$store.state.addGood
+			// }
 		}
 	}
 </script>

@@ -6,8 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	state: { // 共享的数据 
 		arr: [],
-		good: null,
-		addGood: null
+		good: null || (window.sessionStorage.good && JSON.parse(window.sessionStorage.good)),
+		addGood: null || (window.sessionStorage.addGood && JSON.parse(window.sessionStorage.addGood))
 
 
 
@@ -44,9 +44,12 @@ export default new Vuex.Store({
 		},
 		CHANGEGOOD(state, item) {
 			state.good = item;
+			window.sessionStorage.good = JSON.stringify(item);
 		},
 		ADD_ADSGOOD(state, item) {
 			state.addGood = item;
+			window.sessionStorage.addGood = JSON.stringify(item);
+
 		}
 	},
 	actions: { // 异步操作的事件

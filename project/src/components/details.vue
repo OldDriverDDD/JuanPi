@@ -1,6 +1,8 @@
 <template>
-<div id="details">
-	<div class="imgs">
+<div id="details" ref="showSahde">
+<div class="allDiv" ref="allDiv"></div>
+	<span class="resver" @click="backs()"></span>
+	<div class="imgs" >
 		<img :src="comms.pic_url">
 	</div>
 	<div class="price">
@@ -118,7 +120,7 @@
 		</div>
 		
 	</div>
-	<div>
+	
 		
 	
 	<div class="shopping" ref="shoppings">
@@ -155,9 +157,9 @@
 				<span @click="goCart()">加入购物车</span>
 			</div>
 		</div>
-		<div></div>
+		
 	 </div>
-	</div>
+	
 </div>
 	
 	
@@ -183,12 +185,28 @@
 				this.$store.commit('REDUCE_GOODSNUM', this.comms)
 			},
 			clo(){
-				this.$refs.shoppings.style.display="none"
+				this.$refs.shoppings.style.display="none";
+				this.$refs.allDiv.style.display="none"
 			},
 			showDiv(){
 				this.$refs.shoppings.style.display="block";
+				console.log(this.$refs.showSahde);
+				this.$refs.allDiv.style.display="block"
 				
-			}	
+			},
+			saveValue(){
+				if (localStorage.getItem(this.comms)) {
+					localStorage.setItem(this.comms)
+					// console.log(localStorage.getItem(this.comms));
+					return localStorage.getItem(this.comms)
+				}else{
+					localStorage.getItem(this.comms)
+				}
+				
+			},
+			backs(){
+				history.back();
+			}
 		},
 		computed:{
 			comms(){
@@ -197,8 +215,9 @@
 			}
 		},
 		created() {
-			console.log(this.comms)
+			// console.log(this.comms)
 			this.$store.commit('ADD_GOODSNUM', this.comms);
+			this.saveValue;
 		},
 		mounted() {
 			// console.log(this.comms);
@@ -208,21 +227,40 @@
 	}
 </script>
 <style type="text/css" scoped>
+/*返回按钮*/
+	.resver{
+		font-family: "juanPiIco";
+		font-size: 0.7rem;
+		position: absolute;
+		left: 0.3rem;
+		background-color: #fff;
+		border-radius: 50%;
+		width: 0.8rem;
+		margin-top: 0.1rem;
+		
+	}
+	.resver:before{
+		content:"\e60b";
+	}
     .allDiv{
     	width: 100%;
     	height: 100%;
     	background-color: rgba(0,0,0,0.7);
-    	display: block;
+    	z-index: 999;
+    	position: fixed;
+    	top: 0;
+    	left: 0;
+    	display: none;
     }
 	/*购物车小页面*/
 	.shopping{
 		width: 100%;
-		position: relative;
+		position: fixed;
 		background-color:#fff; 
-		bottom:0;
+		top:10.1rem;
 		height: 12.0rem;
 		padding-left: 0.42rem;
-		/*z-index: 1000;*/
+		z-index: 1000;
 		display: none;
 	}
 	.close{

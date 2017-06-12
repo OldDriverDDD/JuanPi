@@ -9,7 +9,7 @@
 	   	   <router-link to="/search" class="search"></router-link>
 
 	   </div>
-	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
+	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}" id="top">
 			<router-link to = "/today/new" class="topbarli">上新</router-link>
 			<router-link to = "/today/dress" class="topbarli">女装</router-link>
 			<router-link to = "/today/shoesBag" class="topbarli">鞋包</router-link>
@@ -33,7 +33,9 @@
 				return {
 					scroll:'',
 					flag:null,
-					changColor:1
+					changColor:1,
+					currtIndex:'1',
+					
 				}
 			},
 			methods: {
@@ -46,6 +48,9 @@
 		        }
 
 		      },
+		      changeIndex(itemIndex){
+		      	this.currtIndex = index;
+		      }
 
 		    },
 			mounted() {
@@ -87,7 +92,7 @@
 	    position: fixed;
 		z-index: 2;
 	}
-	.topbarli{
+	#top>a{
 		font-size: 0.47rem;
 		height: 1.14rem;
 		line-height: 1.14rem;
@@ -100,14 +105,21 @@
 		background-color: #fff;
 		
 	}
-/*	.nn{
-		color: #ff464e;
-		border-bottom: 0.04rem solid #ff464e;
+	.topbarli{
+		font-size: 0.47rem;
+		height: 1.14rem;
+		line-height: 1.14rem;
+		text-align: center;
+		color: #333;
+		white-space: nowrap;
+		box-sizing:border-box;
+		padding: 0 0.57rem;
+		margin:auto;
+		background-color: #fff;
+		/*color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;*/
+		
 	}
-	#today .topbarli:hover{
-		color: #ff464e;
-		border-bottom: 0.04rem solid #ff464e;
-	}*/
 	.search{
 		font-family: "juanPiIco";
 		font-size: 0.7rem;
@@ -130,7 +142,10 @@
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
 	}
-
+	.activeStyle{
+		color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;
+	}
 
 
 	

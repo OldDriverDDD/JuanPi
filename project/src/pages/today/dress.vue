@@ -96,7 +96,7 @@
 				this.data2 = res.data.module_ads.multi_block[2].data[0].child;
 				this.data3 = res.data.module_ads.multi_block[3].data[0].child;
 				this.data4 = res.data.module_ads.multi_block[4].data[0].child;
-				console.log(this.data4);
+				// console.log(this.data4);
 				this.data5 = res.data.module_ads.multi_block[5].data[0].child[0].pic;
 
 				console.log(res.data);
@@ -108,11 +108,11 @@
 
 				this.sdata.map(item => {
 					this.sUrl = item.target_url;
-					console.log(item.target_url);
+					// console.log(item.target_url);
 				});
 
-				console.log('fjlkdsajflkdsajflkdsafjdslafjlkdsa');
-				console.log(this.sUrl);
+				// console.log('fjlkdsajflkdsajflkdsafjdslafjlkdsa');
+				// console.log(this.sUrl);
 
 				
 				
@@ -171,7 +171,7 @@
 
 	}
 	.kindClass:nth-of-type(1){
-		/*padding-top: 0.9rem;*/
+		padding-top: 1.14rem;
 	}
 	.kindClass div{
 		width: 100%;

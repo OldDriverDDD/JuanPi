@@ -96,7 +96,7 @@
 	}
 	.marketLi{
 		display: inline-block;
-		font-size: 42Px;
+		font-size: 42px;
 		width:33%;
 		height: 1.52rem;
 		line-height: 1.52rem;
