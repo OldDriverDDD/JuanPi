@@ -54,7 +54,10 @@
 	<div class="sort">
 		<ul>
 			<li @click="all();changeFlag(1)" :class="{lis: flag == 1}" attrNum="1">综合</li>
-			<li @click="price();changeFlag(2);" :class="{lis: flag == 2}" attrNum="2">价格<span :class="flag != 2 ? 'resvers' : { resvers_top: priceBgColor, resvers_bottom: !priceBgColor}" @click=""></span></li>
+
+			<li @click="price();changeFlag(2);" :class="{lis: flag == 2}" attrNum="2">价格
+			<span :class="flag != 2 ? 'resvers' : { resvers_top: priceBgColor, resvers_bottom: !priceBgColor}"></span></li>
+
 			<li @click="sales();changeFlag(3)" :class="{lis: flag == 3}" attrNum="3">销量</li>
 			<li @click="onlay();changeFlag(4)" :class="{lis: flag == 4}" attrNum="4">仅看有货<span :class="flag == 4 ? 'mySpan':'myspan'"></span></li>
 		</ul>
@@ -93,14 +96,13 @@
 			}
 		},
 		methods:{
+			//跳转到详情页面
 			goComm(item){
 				this.$router.push('/details/');
 				this.$store.commit('CHANGEGOOD', item);
 				// this.$store.commit('ADD_GOODSNUM',item)
 			},
-			getEle(){
-				console.log(this.$refs.dd);
-			},
+			//页面滚动 标签显示隐藏
 			retScoll(){
 				this.scoll = document.body.scrollTop;
 				if (this.scoll >200) {
@@ -111,35 +113,42 @@
 				// console.log(this.scoll);
 
 			},
+			//返回
 			backs(){
 				history.back();
 			},
+			//综合排序
 			all(){
 				this.axios.get('../../../static/data/goods.json').then(res=>{
 					this.goods2 = res.data.data.special;
 				})
 			},
+			//价格排序
 			price(){
 				this.axios.get('../../../static/data/price1.json').then(res=>{
 					this.goods2 = res.data.data.special;
 				})
 			},
+			//销量
 			sales(){
 				this.axios.get('../../../static/data/salse.json').then(res=>{
 					this.goods2 = res.data.data.special;
 				})
 			},
+			//只看有货
 			onlay(){
 				this.axios.get('../../../static/data/onlay.json').then(res=>{
 					this.goods2 = res.data.data.special;
 					// this.flag =!this.flag;
 				})
 			},
+			//点击事件 改变样式
 			changeFlag (attrNum) {//改变flag值
-				if(attrNum == 2){
+				if(attrNum == 2){//判断点击的是否是价格排序
 					this.flag = attrNum;
 					this.priceBgColor = !this.priceBgColor
 				}else{
+					//只要针对 只看有货 的点击改变样式
 					if(this.flag == attrNum){
 						this.flag = false
 					}else{
@@ -163,6 +172,7 @@
 			// window.addEventListener('scroll',this.retScoll)
 
 		},
+		//获取点击对象的数据
 		computed:{
 			getItem(){
 				return this.$store.state.addGood

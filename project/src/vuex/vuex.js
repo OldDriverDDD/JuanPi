@@ -8,9 +8,6 @@ export default new Vuex.Store({
 		arr: [],
 		good: null || (window.sessionStorage.good && JSON.parse(window.sessionStorage.good)),
 		addGood: null || (window.sessionStorage.addGood && JSON.parse(window.sessionStorage.addGood))
-
-
-
 	},
 	mutations: { // 修改数据的唯一途径
 		ADD_GOODSNUM(state, newItem) {
@@ -23,9 +20,10 @@ export default new Vuex.Store({
 				}
 			});
 			if(flag == false) {
-				console.log('first add')
+				console.log('first add');
 				// newItem.count = 1;
 				Vue.set(newItem, 'count', 1);
+				Vue.set(newItem, 'singleFlag', false);
 				state.arr.push(newItem);
 			}
 			console.log(state.arr)
@@ -35,7 +33,7 @@ export default new Vuex.Store({
 				if (item.title == a.title) {
 					a != item && item.count--;
 					a.count--;
-					if (a.count == 1) {
+					if (a.count < 1) {
 						state.arr.splice(i, 1);
 					}
 				} 
@@ -60,16 +58,38 @@ export default new Vuex.Store({
 		allPrice(state) {
 			let money = 0;
 			state.arr.map(item => {
-				money += item.count * parseFloat(item.tuan_price);
+				if(item.singleFlag == true) {
+					money += item.count * parseFloat(item.tuan_price);
+				}		
 			});
 			return money;
 		},
 		goodsCount(state) {
 			let allCount = 0;
 			state.arr.map(item => {
-				allCount += item.count;
+				if(item.singleFlag == true){
+					allCount += item.count;
+				}	
 			});
 			return allCount;
+		},
+		oPrice(state) {
+			let oMoney = 0;
+			state.arr.map(item => {
+				if(item.singleFlag == true) {
+					oMoney += item.count * parseFloat(item.oprice);
+				}		
+			});
+			return oMoney;
+		},
+		differencePrice(state) {
+			let dMoney = 0;
+			state.arr.map(item => {
+				if(item.singleFlag == true) {
+					dMoney += (item.count * parseFloat(item.oprice) - item.count * parseFloat(item.tuan_price));
+				}		
+			});
+			return dMoney;
 		}
 	}
 })

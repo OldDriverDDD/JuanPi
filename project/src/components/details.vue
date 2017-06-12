@@ -148,7 +148,7 @@
 				<span class="shopp">购买数量</span>
 				<div class="numChange" >
 					 <span class="reduce" @click="reduce()">-</span>
-					 <span class="num">{{ comms.count }}</span>
+					 <span class="num">{{ comms.count || 0 }}</span>
 					 <span class="add" @click="toCar()">+</span>
 				</div>
 			</div>
@@ -174,40 +174,52 @@
 			}
 		},
 		methods:{
+			//跳转到购物车页面
 			goCart(item){
-				this.$router.push('/car/')
+				this.$router.push('/car/');
+
 			},
+			//调用添加count值的方法
 			toCar() {
 				this.$store.commit('ADD_GOODSNUM', this.comms);
 				console.log(this.$store.state.arr);
 			},
+			//调用减少count值的方法
 			reduce(){
 				this.$store.commit('REDUCE_GOODSNUM', this.comms)
 			},
+			//关闭页面
 			clo(){
 				this.$refs.shoppings.style.display="none";
 				this.$refs.allDiv.style.display="none"
 			},
+			//显示div
 			showDiv(){
 				this.$refs.shoppings.style.display="block";
 				console.log(this.$refs.showSahde);
 				this.$refs.allDiv.style.display="block"
 				
 			},
+			//返回
 			backs(){
 				history.back();
 			}
 		},
 		computed:{
+			//获取点击对象的信息
 			comms(){
 				return this.$store.state.good;
 				// console.log(this.item);
 			}
 		},
+		//在页面创建之后调用一次添加count的方法
 		created() {
 			// console.log(this.comms)
 			this.$store.commit('ADD_GOODSNUM', this.comms);
 		
+
+			
+
 		},
 		mounted() {
 			// console.log(this.comms);
