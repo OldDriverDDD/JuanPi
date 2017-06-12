@@ -194,16 +194,6 @@
 				this.$refs.allDiv.style.display="block"
 				
 			},
-			saveValue(){
-				if (localStorage.getItem(this.comms)) {
-					localStorage.setItem(this.comms)
-					// console.log(localStorage.getItem(this.comms));
-					return localStorage.getItem(this.comms)
-				}else{
-					localStorage.getItem(this.comms)
-				}
-				
-			},
 			backs(){
 				history.back();
 			}
@@ -217,7 +207,7 @@
 		created() {
 			// console.log(this.comms)
 			this.$store.commit('ADD_GOODSNUM', this.comms);
-			this.saveValue;
+		
 		},
 		mounted() {
 			// console.log(this.comms);

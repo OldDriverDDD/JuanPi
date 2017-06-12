@@ -2,7 +2,7 @@
 	<div id="special">
 		<div class="topMU">
 		<span class="resver" @click="backs()"></span>
-			<p>{{ $router.params }}</p>
+			<p>{{ getItem.title }}</p>
 		<span class="dot"></span>
 		</div>
 		<div class="line"></div>
@@ -164,9 +164,9 @@
 
 		},
 		computed:{
-			// getItem(){
-			// 	return this.$store.state.addGood
-			// }
+			getItem(){
+				return this.$store.state.addGood
+			}
 		}
 	}
 </script>

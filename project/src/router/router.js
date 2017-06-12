@@ -98,7 +98,7 @@ export default new VueRouter({
 		{
 			path: '', component: Today, children: [
 
-		        { path: '', component: New },
+		        { path: '', redirect: '/today/new' },
 		        { path: 'new', component: New },
 		        { path: 'dress', component: Dress },
 		        { path: 'shoesBag', component: Shoesbag },
@@ -112,7 +112,7 @@ export default new VueRouter({
 		},{
 			path: '/today', component: Today, children:[
 
-		        { path: '', component: New },
+		        { path: '', redirect: 'new' },
 		        { path: 'new', component: New },
 		        { path: 'dress', component: Dress },
 		        { path: 'shoesBag', component: Shoesbag },

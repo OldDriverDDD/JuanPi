@@ -35,7 +35,7 @@
 					flag:null,
 					changColor:1,
 					currtIndex:'1',
-					
+					initStyle: 'router-link-active'
 				}
 			},
 			methods: {
@@ -59,7 +59,8 @@
 		    },
 		    components:{
 		    	
-		    }
+		    },
+
 
 	  }
 	   
