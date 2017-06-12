@@ -27,21 +27,24 @@
 		</div>
 		<!-- 线 -->
 		<div class="line"></div>
+		<!-- 品牌 -->
 		<div class="brand">
 			
 				<div class="brands" v-for="item in data3">
-					<img :src="item.pic">
+					<img :src="item.pic"  @click="goAdd(item)">
 				</div>
 			
 		</div>
+		<!-- 第二行 -->
 		<div class="brand">
 			
 				<div class="brands" v-for="item in data4">
-					<img :src="item.pic">
+					<img :src="item.pic"  @click="goAdd(item)">
 				</div>
 			
 		</div>
 		<div class="line"></div>
+		<!-- 上新 -->
 		<div class="updata">
 			<img :src="data5">
 		</div>
@@ -49,7 +52,7 @@
 		<!-- 女装专场 -->
 		<div class="specil">
 			<div class="lists" v-for="item  in sdata" @click="transmit(item)">
-				<img :src="item.pic_url">
+				<img :src="item.pic_url" @click="goAdd(item)">
 				<p class="favorAble">{{ item.coupon.rules[0].aeBankInfo}}</p>
 				<p class="nameSpecil">{{ item.coupon.abName}}</p>
 				<span class="newUp">{{item.residue}}</span>
@@ -93,6 +96,7 @@
 				this.data2 = res.data.module_ads.multi_block[2].data[0].child;
 				this.data3 = res.data.module_ads.multi_block[3].data[0].child;
 				this.data4 = res.data.module_ads.multi_block[4].data[0].child;
+				// console.log(this.data4);
 				this.data5 = res.data.module_ads.multi_block[5].data[0].child[0].pic;
 
 				console.log(res.data);
@@ -104,11 +108,11 @@
 
 				this.sdata.map(item => {
 					this.sUrl = item.target_url;
-					console.log(item.target_url);
+					// console.log(item.target_url);
 				});
 
-				console.log('fjlkdsajflkdsajflkdsafjdslafjlkdsa');
-				console.log(this.sUrl);
+				// console.log('fjlkdsajflkdsajflkdsafjdslafjlkdsa');
+				// console.log(this.sUrl);
 
 				
 				
@@ -128,14 +132,17 @@
 			transmit(item){
 
 				// console.log(item)
-				id:JSON.stringify(item),
-				this.$router.push('/special/'+item.title)
 				
+				this.$router.push('/special/'+item.title)
+
 
 			},
 			goTop(){
 				document.body.scrollTop=0;
 				document.documentElement.scrollTop=0;
+			},
+			goAdd(item){
+				this.$store.commit('ADD_ADSGOOD',item);
 			}
 		}
 	}
@@ -162,6 +169,9 @@
 		width: 100%;
 		background-color: #fff;
 
+	}
+	.kindClass:nth-of-type(1){
+		padding-top: 1.14rem;
 	}
 	.kindClass div{
 		width: 100%;

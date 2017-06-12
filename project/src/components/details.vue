@@ -1,25 +1,21 @@
 <template>
-<div id="details">
-	<!-- <h2>{{ comms }}</h2> -->
-	<div>
-		<span>-</span>
-		<span>0</span>
-		<span @click="toCar()">+</span>
-	</div>
-	<div class="imgs">
-		<img src="../../static/hyimages/juanpi_files/h.jpg">
+<div id="details" ref="showSahde">
+<div class="allDiv" ref="allDiv"></div>
+	<span class="resver" @click="backs()"></span>
+	<div class="imgs" >
+		<img :src="comms.pic_url">
 	</div>
 	<div class="price">
 		<div class="priTop">
 			<div class="p1">
-				<span class="priceT"><i>￥</i>43.90</span>
-				<s>￥100.00</s>
+				<span class="priceT"><i>￥</i>{{ comms.tuan_price}}</span>
+				<s>￥{{ comms.oprice}}</s>
 				<span class="post">包邮</span>
 				<span class="post">拼团价</span>
 				<span class="group">1891已团</span>
 			</div>
 			<div class="p2">
-				<a href="##">泡泡袖松紧娃娃衬衫</a>
+				<a href="##">{{ comms.title }}</a>
 			</div>
 			<p class="p3">
 				<a href="##"><img src="" />24小时发货</a>
@@ -31,14 +27,15 @@
 	<!-- 线 -->
 	<div class="line"></div>
 	<div class="team">
-		<p class="addT">可直接参加TA们的团</p>
+		<!-- <p class="addT">可直接参加TA们的团</p> -->
 		<div class="city">
 			<dl>
 				<dt><img src="../../static/hyimages/juanpi_files/46.jpg"></dt>
 				<dd>温暖</dd>
 				<dd>朝阳市</dd>
 			</dl>
-		</div>
+		</div> 
+	
 		<div class="goAdd">
 			<dl>
 				<dd>还差<i>1</i>人成团</dd>
@@ -116,13 +113,53 @@
 				<p>￥69.80</p>
 				<p>单独购买</p>
 			</div>
-			<div class="teamBuy" @click="goCart()">
+			<div class="teamBuy" @click="showDiv()">
 				<p>￥59.80</p>
 				<p>立即开团<span>2人成团</span></p>
 			</div>
 		</div>
 		
 	</div>
+	
+		
+	
+	<div class="shopping" ref="shoppings">
+		<img :src="comms.pic_url">
+		<span class="close" @click="clo()">X</span>
+		<div class="minPrice">
+			<p>￥{{ comms.oprice }}</p>
+			<p>请选择颜色 尺码</p>
+		</div>
+		<div class="Csize">
+			<p class="cAnds">颜色</p>
+			<p class="flower">花色</p>
+			<p class="cAnds">尺码</p>
+			<div class="sizeChange">
+			<ul>
+				<li>S</li>
+				<li>M</li>
+				<li>L</li>
+				<li>XL</li>
+				<li>XXL</li>
+			</ul>
+				
+			</div>
+			<div class="buyNum">
+				<span class="shopp">购买数量</span>
+				<div class="numChange" >
+					 <span class="reduce" @click="reduce()">-</span>
+					 <span class="num">{{ comms.count }}</span>
+					 <span class="add" @click="toCar()">+</span>
+				</div>
+			</div>
+			<div class="joinCart">
+				<span>立即开团</span>
+				<span @click="goCart()">加入购物车</span>
+			</div>
+		</div>
+		
+	 </div>
+	
 </div>
 	
 	
@@ -143,22 +180,207 @@
 			toCar() {
 				this.$store.commit('ADD_GOODSNUM', this.comms);
 				console.log(this.$store.state.arr);
-			}	
+			},
+			reduce(){
+				this.$store.commit('REDUCE_GOODSNUM', this.comms)
+			},
+			clo(){
+				this.$refs.shoppings.style.display="none";
+				this.$refs.allDiv.style.display="none"
+			},
+			showDiv(){
+				this.$refs.shoppings.style.display="block";
+				console.log(this.$refs.showSahde);
+				this.$refs.allDiv.style.display="block"
+				
+			},
+			saveValue(){
+				if (localStorage.getItem(this.comms)) {
+					localStorage.setItem(this.comms)
+					// console.log(localStorage.getItem(this.comms));
+					return localStorage.getItem(this.comms)
+				}else{
+					localStorage.getItem(this.comms)
+				}
+				
+			},
+			backs(){
+				history.back();
+			}
 		},
 		computed:{
 			comms(){
-				return this.$store.state.good
+				return this.$store.state.good;
 				// console.log(this.item);
 			}
 		},
+		created() {
+			// console.log(this.comms)
+			this.$store.commit('ADD_GOODSNUM', this.comms);
+			this.saveValue;
+		},
 		mounted() {
-			console.log(this.comms);
+			// console.log(this.comms);
 		}
 
 		
 	}
 </script>
 <style type="text/css" scoped>
+/*返回按钮*/
+	.resver{
+		font-family: "juanPiIco";
+		font-size: 0.7rem;
+		position: absolute;
+		left: 0.3rem;
+		background-color: #fff;
+		border-radius: 50%;
+		width: 0.8rem;
+		margin-top: 0.1rem;
+		
+	}
+	.resver:before{
+		content:"\e60b";
+	}
+    .allDiv{
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(0,0,0,0.7);
+    	z-index: 999;
+    	position: fixed;
+    	top: 0;
+    	left: 0;
+    	display: none;
+    }
+	/*购物车小页面*/
+	.shopping{
+		width: 100%;
+		position: fixed;
+		background-color:#fff; 
+		top:10.1rem;
+		height: 12.0rem;
+		padding-left: 0.42rem;
+		z-index: 1000;
+		display: none;
+	}
+	.close{
+		float: right;
+		font-size: 0.6rem;
+		margin-right: 1rem;
+		color: #666;
+	}
+	.shopping>img{
+		position: absolute;
+		top: -1.2rem;
+		width: 3.0rem;
+	}
+	.minPrice{
+		margin-left: 3.6rem;
+		display: inline-block;
+		vertical-align: top;
+		font-size: 42px;
+		line-height: 0.8rem;
+	}
+	.minPrice p:first-child{
+		color: red;
+		font-size: 0.66rem;
+	}
+	.Csize{
+		width:100%;
+	}
+	.cAnds{
+		margin: 0.3rem 0 0.3rem 0;
+		font-size: 50px;
+	}
+	.flower{
+		font-size: 42px;
+		color: #fff;
+		background-color:#ff464e;
+		height: 0.96rem;
+		width: 30%;
+		line-height: 0.9rem;
+		text-align: center; 
+	}
+
+	.sizeChange{
+		font-size: 50px;
+		width: 100%;
+		overflow: hidden;
+	}
+	.sizeChange ul{
+		width: 100%;
+		/*display: flex;*/
+	}
+	.sizeChange ul li{
+		width: 30%;
+		margin-top: 0.18rem;
+		height: 0.96rem;
+		line-height: 0.96rem;
+		display: block;
+		text-align: center;
+		/*overflow: hidd*/
+		color: #333;
+		border: 1px solid #333;
+		align-item:center;
+		float: left;
+		margin-right: 0.2rem;
+	}
+	.buyNum{
+		width:100%;
+		font-size: 50px;
+		margin-top: 0.3rem;
+		
+	}
+	.shopp{
+		float: left;
+	}
+	.numChange{
+		float: right;
+		margin-right: .8rem;
+	}
+	.numChange .reduce{
+		color: red;
+		width: 0.6rem;
+		height: 0.6rem;
+		display: inline-block;
+		border: 1px solid #333;
+		line-height: 0.6rem;
+		background-color: #f7f7f7;
+		text-align: center;
+		margin-right: 0.1rem;
+	}
+	.add{
+		color: red;
+		width: 0.6rem;
+		height: 0.6rem;
+		display: inline-block;
+		border: 1px solid #333;
+		line-height: 0.6rem;
+		background-color: #f7f7f7;
+		text-align: center;
+		margin-left: 0.1rem;
+	}
+	.joinCart{
+		width: 100%;
+		clear: both;
+		padding-top: 0.4rem;
+
+	}
+	.joinCart span{
+		font-size: 60px;
+		color: #fff;
+		background-color: #ff464e;
+		width: 45%;
+		display: inline-block;
+		margin-right: 0.2rem;
+		text-align: center;
+		padding-top:0.1rem;
+		padding-bottom: 0.1rem;
+		border-radius: 0.1rem; 
+	}
+
+
+	/*底部的菜单*/
 	.bottomBar{
 		width: 100%;
 		position: fixed;
@@ -257,23 +479,30 @@
 
 	#details{
 		background: #fff;
+		overflow: hidden;
 	}
 	.imgs{
 		width: 100%;
 		background-color: #fff;
+		overflow: hidden;
 	}
 	.imgs img{
 		width: 100%;
 		float: left;
+
 	}
 	/*价格显示*/
 	.price{
 		width: 100%;
 		background-color: #fff;
+		overflow: hidden;
+		height: 3.5rem;
 
 	}
 	.priTop{
 		width: 100%;
+		overflow: hidden;
+
 	}
 	.p1{
 		background-color: #fff;
@@ -296,6 +525,8 @@
 		font-size: 0.66rem;
 		color: #ff464e;
 		vertical-align: middle;
+		overflow: hidden;
+
 
 	}
 	.p1 s{
@@ -388,6 +619,7 @@
 		box-sizing:border-box;
 		padding-left: 0.42rem;
 		padding-right: 0.42rem;
+		overflow: hidden;
 	}
 	.addT{
 		font-size: 0.42rem;
@@ -404,7 +636,9 @@
 
 	}
 	.city dl{
+		overflow: hidden;
 		width: 100%;
+		padding-top: 0.1rem;
 	}
 	.city dl dt{
 		float: left;
@@ -431,9 +665,11 @@
 		color: #999;
 		position: relative;
 
+
 	}
 	.goAdd dl{
 		width: 100%;
+		padding-top: 0.25rem;
 
 	}
 	.goAdd dl dt{
@@ -443,7 +679,7 @@
 		text-align: center;
 		color: #ff464e;
 		position: absolute;
-		top: 0.2rem;
+		top: 0.5rem;
 		right: 0;
 		border:1px solid;
 	}

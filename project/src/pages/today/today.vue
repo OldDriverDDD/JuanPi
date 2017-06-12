@@ -9,8 +9,8 @@
 	   	   <router-link to="/search" class="search"></router-link>
 
 	   </div>
-	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}">
-			<router-link to = "/today/new" class="topbarli nn">上新</router-link>
+	   <div class="topBar" ref  ="topbar" :class = "{'scrollbar':flag}" id="top">
+			<router-link to = "/today/new" class="topbarli">上新</router-link>
 			<router-link to = "/today/dress" class="topbarli">女装</router-link>
 			<router-link to = "/today/shoesBag" class="topbarli">鞋包</router-link>
 			<router-link to = "/today/mother" class="topbarli">母婴</router-link>
@@ -22,44 +22,46 @@
 		</div>
 		
 	   <router-view></router-view>
-	   <!-- <new></new> -->
+	   
 
 	</div>
 </template>
 <script>
 	// import New from "./new"
 	export default{
-		data() {
-			return {
-				scroll:'',
-				flag:null
-			}
-		},
-		methods: {
-	      scrollBar() {
-	        this.scroll = document.body.scrollTop;
-	        if(this.scroll>0){
-	        	this.flag = true;
-	        }else{
-	        	this.flag = false;
-	        }
+			data() {
+				return {
+					scroll:'',
+					flag:null,
+					changColor:1,
+					currtIndex:'1',
+					
+				}
+			},
+			methods: {
+		      scrollBar() {
+		        this.scroll = document.body.scrollTop;
+		        if(this.scroll>0){
+		        	this.flag = true;
+		        }else{
+		        	this.flag = false;
+		        }
 
-	      },
+		      },
+		      changeIndex(itemIndex){
+		      	this.currtIndex = index;
+		      }
 
-	    },
-		mounted() {
-	      window.addEventListener('scroll', this.scrollBar)
+		    },
+			mounted() {
+		      window.addEventListener('scroll', this.scrollBar)
 
-	    },
-	    components:{
-	    	// New
-	    }
+		    },
+		    components:{
+		    	
+		    }
 
-	    }
-	    // components:{
-	    // 	New
-	    // }
-
+	  }
 	   
 	
 
@@ -90,7 +92,7 @@
 	    position: fixed;
 		z-index: 2;
 	}
-	.topbarli{
+	#top>a{
 		font-size: 0.47rem;
 		height: 1.14rem;
 		line-height: 1.14rem;
@@ -103,13 +105,20 @@
 		background-color: #fff;
 		
 	}
-	.nn{
-		color: #ff464e;
-		border-bottom: 0.04rem solid #ff464e;
-	}
-	#today .topbarli:hover{
-		color: #ff464e;
-		border-bottom: 0.04rem solid #ff464e;
+	.topbarli{
+		font-size: 0.47rem;
+		height: 1.14rem;
+		line-height: 1.14rem;
+		text-align: center;
+		color: #333;
+		white-space: nowrap;
+		box-sizing:border-box;
+		padding: 0 0.57rem;
+		margin:auto;
+		background-color: #fff;
+		/*color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;*/
+		
 	}
 	.search{
 		font-family: "juanPiIco";
@@ -125,11 +134,18 @@
 		top: 0;
 
 	}
+	.clickStyle{
+		color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;
+	}
 	.router-link-active{
 		color: #ff464e;
 		border-bottom: 0.04rem solid #ff464e;
 	}
-
+	.activeStyle{
+		color: #ff464e;
+		border-bottom: 0.04rem solid #ff464e;
+	}
 
 
 	

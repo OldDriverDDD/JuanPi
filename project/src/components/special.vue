@@ -1,8 +1,8 @@
 <template>
 	<div id="special">
 		<div class="topMU">
-		<span class="resver"></span>
-			<p>{{ id.id }}</p>
+		<span class="resver" @click="backs()"></span>
+			<p>{{ $router.params }}</p>
 		<span class="dot"></span>
 		</div>
 		<div class="line"></div>
@@ -42,19 +42,28 @@
 		<dl v-for="item in goods1">
 			<dt @click="goComm(item)"><img :src="item.pic_url"></dt>
 			<dd>
-				<p>￥220.00<span>拼</span><s>{{ item.oprice }}</s></p>
+				<p>￥{{ item.tuan_price}}<span>拼</span><s>{{ item.oprice }}</s></p>
 				<p>{{ item.title }}</p>
 			</dd>
 		</dl>
 	</div>
+
 	<div class="hot">
 		<p>-正在特卖-</p>
+	</div>
+	<div class="sort">
+		<ul>
+			<li @click="all();changeFlag(1)" :class="{lis: flag == 1}" attrNum="1">综合</li>
+			<li @click="price();changeFlag(2);" :class="{lis: flag == 2}" attrNum="2">价格<span :class="flag != 2 ? 'resvers' : { resvers_top: priceBgColor, resvers_bottom: !priceBgColor}" @click=""></span></li>
+			<li @click="sales();changeFlag(3)" :class="{lis: flag == 3}" attrNum="3">销量</li>
+			<li @click="onlay();changeFlag(4)" :class="{lis: flag == 4}" attrNum="4">仅看有货<span :class="flag == 4 ? 'mySpan':'myspan'"></span></li>
+		</ul>
 	</div>
 	<div class="cloths">
 		<dl v-for="item in goods2">
 			<dt @click="goComm(item)"><img :src="item.pic_url"></dt>
 			<dd>
-				<p>￥220.00<span>拼</span><s>{{ item.oprice }}</s></p>
+				<p>￥{{ item.tuan_price}}<span>拼</span><s>{{ item.oprice }}</s></p>
 				<p>{{ item.title }}</p>
 			</dd>
 		</dl>
@@ -76,7 +85,10 @@
 				id:this.$route.params,
 				goods1:[],
 				goods2:[],
-				scoll :''
+				scoll :'',
+				flag:1,
+				flager:true,
+				priceBgColor: true
 				// console.log(id)
 			}
 		},
@@ -84,7 +96,7 @@
 			goComm(item){
 				this.$router.push('/details/');
 				this.$store.commit('CHANGEGOOD', item);
-				// this.$store.commit({'ADD_GOODSNUM',item})
+				// this.$store.commit('ADD_GOODSNUM',item)
 			},
 			getEle(){
 				console.log(this.$refs.dd);
@@ -98,6 +110,42 @@
 				}
 				// console.log(this.scoll);
 
+			},
+			backs(){
+				history.back();
+			},
+			all(){
+				this.axios.get('../../../static/data/goods.json').then(res=>{
+					this.goods2 = res.data.data.special;
+				})
+			},
+			price(){
+				this.axios.get('../../../static/data/price1.json').then(res=>{
+					this.goods2 = res.data.data.special;
+				})
+			},
+			sales(){
+				this.axios.get('../../../static/data/salse.json').then(res=>{
+					this.goods2 = res.data.data.special;
+				})
+			},
+			onlay(){
+				this.axios.get('../../../static/data/onlay.json').then(res=>{
+					this.goods2 = res.data.data.special;
+					// this.flag =!this.flag;
+				})
+			},
+			changeFlag (attrNum) {//改变flag值
+				if(attrNum == 2){
+					this.flag = attrNum;
+					this.priceBgColor = !this.priceBgColor
+				}else{
+					if(this.flag == attrNum){
+						this.flag = false
+					}else{
+						this.flag = attrNum
+					}
+				}
 			}
 
 		},
@@ -108,14 +156,117 @@
 				console.log(this.goods1);
 				this.goods2 = res.data.data.special;
 			})
+		
 		},
 		// 页面渲染之后 添加绑定事件
 		mounted(){
-			window.addEventListener('scroll',this.retScoll)
+			// window.addEventListener('scroll',this.retScoll)
+
+		},
+		computed:{
+			// getItem(){
+			// 	return this.$store.state.addGood
+			// }
 		}
 	}
 </script>
 <style type="text/css">
+	.sort{
+		width: 100%;
+		padding-bottom: 0.15rem;
+		padding-top: 0.15rem;
+		background-color: #fff;
+		border-bottom: 1px solid #ebebeb;
+		text-align: center;
+		
+	}
+	.sort ul{
+		width: 100%;
+		display: flex;
+		font-size: 42px;
+		justify-content:space-around;
+	}
+	.lis{
+		color:red;
+	}
+
+	/*价格上下*/
+	.resvers{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		vertical-align: middle;
+		display: inline-block;
+		background-position-x:0;
+		width: 0.27rem;
+		height: 0.45rem;
+		margin-left:0.15rem;
+		background-size: 1.47rem;  
+	}
+	.resvers_top{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		vertical-align: middle;
+		display: inline-block;
+		background-position-x:-0.54rem;
+		width: 0.27rem;
+		height: 0.45rem;
+		margin-left:0.15rem;
+		background-size: 1.47rem;
+	}
+	.resvers_bottom{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		vertical-align: middle;
+		display: inline-block;
+		background-position-x:-0.27rem;
+		width: 0.27rem;
+		height: 0.45rem;
+		margin-left:0.15rem;
+		background-size: 1.47rem;
+	}
+
+
+	.pri{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		vertical-align: middle;
+		display: inline-block;
+		background-position-x:-0.54rem;
+		width: 0.27rem;
+		height: 0.45rem;
+		margin-left:0.15rem;
+		background-size: 1.47rem;  
+	}
+	.price{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		vertical-align: middle;
+		display: inline-block;
+		background-position-x:-0.27rem;
+		width: 0.27rem;
+		height: 0.45rem;
+		margin-left:0.15rem;
+		background-size: 1.47rem;  
+	}
+	/*只看有货图标*/
+	.myspan{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		background-position-x:-0.81rem;
+		background-position-y:-0.09rem;
+		margin-left: 0.15rem;
+		width: 0.33rem;
+		height: 0.27rem;  	
+		background-size: 1.47rem;
+		display: inline-block;
+		vertical-align: middle;
+
+	}
+	.mySpan{
+		background: url(../../static/hyimages/juanpi_files/sort-sprite.png)no-repeat;
+		background-position-x:-1.14rem;
+		background-position-y:-0.09rem;
+		margin-left: 0.15rem;
+		width: 0.33rem;
+		height: 0.27rem;  	
+		background-size: 1.47rem;
+		display: inline-block;
+		vertical-align: middle;
+	}
 	.dis{
 		width: 100%;
 		position: fixed;
