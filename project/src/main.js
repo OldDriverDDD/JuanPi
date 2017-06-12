@@ -17,6 +17,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
+Vue.prototype.allPriceFlag = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

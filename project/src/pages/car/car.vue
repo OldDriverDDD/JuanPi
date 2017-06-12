@@ -1,30 +1,29 @@
 <template>
 	<div id="car">
-	<h2>{{ goods }}</h2>
 		<div class="header">
 			<i class="back" @click="back()"></i>
 			<span>购物车</span>
 			<span>编辑</span>
 		</div>
 		<ul>
-			<li>
-				<i class="singleChoice" @click="oneChoice()"></i>
-				<img src="" alt="">
+			<li v-for="(item, index) in goods">
+				<i :class="item.singleFlag ? 'sureChoice': 'singleChoice'" @click="oneChoice(item)"></i>
+				<img :src="item.pgpicurl" alt="">
 				<div class="size">
-					<p>气质包臀条纹连衣裙</p>
+					<p>{{ item.title }}</p>
 					<p>黑色 M</p>
 				</div>
-				<div class="price">
-					<p>￥ 79</p>
-					<p>单独购买￥89</p>
+				<div class="prices">
+					<p>￥ {{ item.tuan_price }}</p>
+					<p>单独购买￥{{ item.oprice }}</p>
 				</div>
 				<div class="goodsNumber">
-					<i class="reduce">-</i>
-					<span>1</span>
-					<i class="add">+</i>
+					<i class="reduce" @click="diffGood(item)">-</i>
+					<span>{{ item.count }}</span>
+					<i class="add" @click="addGood(item)">+</i>
 				</div>
 			</li>
-			<li>
+			<!-- <li>
 				<i class="singleChoice" @click="oneChoice()"></i>
 				<img src="" alt="">
 				<div class="size">
@@ -40,19 +39,19 @@
 					<span>1</span>
 					<i class="add">+</i>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 		<div class="footer">
 			<div class="allChoice">
-				<i class="circle"></i>
+				<i :class="allPriceFlag? 'circle1':'circle'" @click="allGoodChoice()"></i>
 				<span>全选</span>
 			</div>
 			<div class="allprice">
-				<p>合计:￥<span>0:00</span></p>
-				<p>总额:￥<span>0:00</span> 立减:￥<span>0:00</span></p>
+				<p>合计:￥<span>{{ allGoodPrice | number }}</span></p>
+				<p>总额:￥<span>{{ allOPrice | number }}</span> 立减:￥<span>{{ allDPrice | number }}</span></p>
 			</div>
 			<router-link to="/car/pay" tag="div">
-				去结算(<span>0</span>)
+				去结算(<span>{{ allGoodCount }}</span>)
 			</router-link>
 		</div>
 	</div>
@@ -65,15 +64,62 @@
 			back() {
 				history.back();
 			},
-			oneChoice() {
-				console.log(11111);
+			oneChoice(item) {
+				console.log(this);
+				item.singleFlag = !item.singleFlag;
+				let num = 0;
+				this.goods.map(function(i) {
+					if(i.singleFlag == false) {
+						num++;
+					}
+				});
+				if(num == 0) {
+					this.allPriceFlag = true;
+				} else {
+					this.allPriceFlag = false;
+				}
+			},
+			allGoodChoice() {
+				this.allPriceFlag = !this.allPriceFlag;
+				if(this.allPriceFlag == false) {
+					this.goods.map(function(j) {
+						j.singleFlag = false;
+					})
+				} else {
+					this.goods.map(function(j) {
+						j.singleFlag = true;
+					})
+				}
+			},
+			diffGood(item) {
+				this.$store.commit('REDUCE_GOODSNUM', item);
+			},
+			addGood(item) {
+				this.$store.commit('ADD_GOODSNUM', item);
 			}
 		},
 		computed:{
 			goods(){
-				return this.$store.state.good
+				return this.$store.state.arr;
+				console.log(this.$store.state.arr);
+			},
+			allGoodPrice() {
+				return this.$store.getters.allPrice;
+			},
+			allGoodCount() {
+				return this.$store.getters.goodsCount;
+			},
+			allOPrice() {
+				return this.$store.getters.oPrice;
+			},
+			allDPrice() {
+				return this.$store.getters.differencePrice;
 			}
-			
+		},
+		filters: {
+			number(num) {
+				return num.toFixed(2);
+			}
 		}
 
 	}
@@ -130,7 +176,7 @@
 		line-height: 1.02rem;
 		position: relative;
 	}
-	.circle {
+	.circle, .circle1 {
 		font-family: "juanPiIco";
 		font-size: 0.6rem;
 		font-style: normal;
@@ -139,8 +185,14 @@
 		left: 25%;
     	top: 20%;
 	}
+	.circle1 {
+		color: #ff464e;
+	}
 	.circle:before {
 		content: "\e622";
+	}
+	.circle1:before {
+		content: "\e621";
 	}
 	.footer .allChoice span {
 		font-size: 0.48rem;
@@ -193,8 +245,21 @@
 	    left: 3%;
 	    top: 39%;
 	}
+	ul li .sureChoice {
+		font-family: "juanPiIco";
+		font-size: 0.6rem;
+		font-style: normal;
+		color: #9b9b9b;
+		position: absolute;
+	    left: 3%;
+	    top: 39%;
+	    color: #ff464e;
+	}
 	ul li .singleChoice:before {
 		content: "\e622";
+	}
+	ul li .sureChoice:before {
+		content: "\e621";
 	}
 	ul li img {
 		float: left;
@@ -213,13 +278,13 @@
 		color: #666;
 		margin-bottom: 0.15rem;
 	}
-	ul li .price {
+	ul li .prices {
 	 	position: absolute;
 	    right: 3%;
 	    top: 15%;
 	    text-align: right;
 	}
-	ul li .price p:nth-of-type(2) {
+	ul li .prices p:nth-of-type(2) {
 		text-decoration: line-through;
 		margin-top: 0.15rem;
 	}

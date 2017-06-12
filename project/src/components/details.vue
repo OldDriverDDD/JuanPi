@@ -148,7 +148,7 @@
 				<span class="shopp">购买数量</span>
 				<div class="numChange" >
 					 <span class="reduce" @click="reduce()">-</span>
-					 <span class="num">{{ comms.count }}</span>
+					 <span class="num">{{ comms.count || 0 }}</span>
 					 <span class="add" @click="toCar()">+</span>
 				</div>
 			</div>
@@ -175,7 +175,8 @@
 		},
 		methods:{
 			goCart(item){
-				this.$router.push('/car/')
+				this.$router.push('/car/');
+
 			},
 			toCar() {
 				this.$store.commit('ADD_GOODSNUM', this.comms);
@@ -194,16 +195,6 @@
 				this.$refs.allDiv.style.display="block"
 				
 			},
-			saveValue(){
-				if (localStorage.getItem(this.comms)) {
-					localStorage.setItem(this.comms)
-					// console.log(localStorage.getItem(this.comms));
-					return localStorage.getItem(this.comms)
-				}else{
-					localStorage.getItem(this.comms)
-				}
-				
-			},
 			backs(){
 				history.back();
 			}
@@ -216,8 +207,7 @@
 		},
 		created() {
 			// console.log(this.comms)
-			this.$store.commit('ADD_GOODSNUM', this.comms);
-			this.saveValue;
+			
 		},
 		mounted() {
 			// console.log(this.comms);
