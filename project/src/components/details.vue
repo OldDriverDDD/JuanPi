@@ -196,7 +196,6 @@
 			//显示div
 			showDiv(){
 				this.$refs.shoppings.style.display="block";
-				console.log(this.$refs.showSahde);
 				this.$refs.allDiv.style.display="block"
 				
 			},

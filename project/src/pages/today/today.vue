@@ -81,7 +81,7 @@
 		display:inline-block;
 		padding: 0.102564rem 0;
 		text-align: center;
-		padding-left: 3.9rem;
+		padding-left: 5.2rem;
 		vertical-align: top;
 
 	}
@@ -117,8 +117,6 @@
 		padding: 0 0.57rem;
 		margin:auto;
 		background-color: #fff;
-		/*color: #ff464e;
-		border-bottom: 0.04rem solid #ff464e;*/
 		
 	}
 	.search{

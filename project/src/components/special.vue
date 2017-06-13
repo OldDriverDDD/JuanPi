@@ -56,7 +56,7 @@
 			<li @click="all();changeFlag(1)" :class="{lis: flag == 1}" attrNum="1">综合</li>
 
 			<li @click="price();changeFlag(2);" :class="{lis: flag == 2}" attrNum="2">价格
-			<span :class="flag != 2 ? 'resvers' : { resvers_top: priceBgColor, resvers_bottom: !priceBgColor}"></span></li>
+			<span :class="flag != 2 ? 'resvers' : { 'resvers_top': priceBgColor, 'resvers_bottom': !priceBgColor}"></span></li>
 
 			<li @click="sales();changeFlag(3)" :class="{lis: flag == 3}" attrNum="3">销量</li>
 			<li @click="onlay();changeFlag(4)" :class="{lis: flag == 4}" attrNum="4">仅看有货<span :class="flag == 4 ? 'mySpan':'myspan'"></span></li>
@@ -149,7 +149,7 @@
 					this.priceBgColor = !this.priceBgColor
 				}else{
 					//只要针对 只看有货 的点击改变样式
-					if(this.flag == attrNum){
+					if(this.flag == 4){
 						this.flag = false
 					}else{
 						this.flag = attrNum

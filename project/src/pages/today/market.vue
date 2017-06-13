@@ -95,9 +95,11 @@
 
 	}
 	.marketLi{
-		display: inline-block;
+		/*display: inline-block;*/
 		font-size: 42px;
-		width:33%;
+		width:33.33%;
+		float: left;
+		box-sizing:border-box;
 		height: 1.52rem;
 		line-height: 1.52rem;
 		text-align: center;
