@@ -3,7 +3,7 @@
      <div class="tabbar">
         <li v-for="(item,index) in barInfo" @click="show(item, index)">
            <img :src="(index == currentIndex) ? item.act_icon : item.bg_icon" alt="" />
-           <p>{{ item.title }}</p>
+           <p :class="(index == currentIndex) ? 'active' : 'normal' ">{{ item.title }}</p>
         </li>
     </div>
     <router-view></router-view>
@@ -68,13 +68,19 @@ export default {
     width: 72px;
     height: 72px;
     position: relative;
-    top: -15px;
+    top: -10px;
   }
-  #app .tabbar p {
+  #app .tabbar .normal {
     text-decoration: none;
     font-size: 30px;
     position: relative;
-    top: -33px;
+    top: -31px;
   }
-
+ #app .tabbar .active {
+    text-decoration: none;
+    font-size: 30px;
+    position: relative;
+    top: -31px;
+    color: #FF464E;
+  }
 </style>

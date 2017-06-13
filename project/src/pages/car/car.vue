@@ -5,7 +5,12 @@
 			<span>购物车</span>
 			<span>编辑</span>
 		</div>
-		<ul>
+		<div class="goodEmpty" v-if="goods.length == 0">
+			<img src="/static/mineImg/empty-cart.png" alt="">
+			<p>看到喜欢的就带回家吧</p>
+			<a href="today">今日上新</a>
+		</div>
+		<ul v-else>
 			<li v-for="(item, index) in goods">
 				<i :class="item.singleFlag ? 'sureChoice': 'singleChoice'" @click="oneChoice(item)"></i>
 				<img :src="item.pgpicurl" alt="">
@@ -23,23 +28,6 @@
 					<i class="add" @click="addGood(item)">+</i>
 				</div>
 			</li>
-			<!-- <li>
-				<i class="singleChoice" @click="oneChoice()"></i>
-				<img src="" alt="">
-				<div class="size">
-					<p>韩版紧身显瘦高腰短裤</p>
-					<p>靛青色 M(中码)</p>
-				</div>
-				<div class="price">
-					<p>￥ 28</p>
-					<p>单独购买￥38</p>
-				</div>
-				<div class="goodsNumber">
-					<i class="reduce">-</i>
-					<span>1</span>
-					<i class="add">+</i>
-				</div>
-			</li> -->
 		</ul>
 		<div class="footer">
 			<div class="allChoice">
@@ -130,7 +118,7 @@
 		width: 100%;
 		height: 1.32rem;
 		background-color: #fff;
-		border-bottom: 1px solid #f4f4f8;
+		border-bottom: 2px solid #f4f4f8;
 		overflow: hidden;
 		line-height: 1.32rem;
 		position: relative;
@@ -319,5 +307,31 @@
 	li .goodsNumber span {
 		font-size: 0.42rem;
 		color: #333;
+	}
+	.goodEmpty {
+		width: 100%;
+		height: 7.81rem;
+		background-color: #fff;
+		text-align: center;
+	}
+	.goodEmpty img {
+		width: 4.2rem;
+		height: 4.2rem;
+		margin-top: 0.2rem;
+	}
+	.goodEmpty p:first-of-type {
+		font-size: 0.42rem;
+		color: #333;
+	}
+	.goodEmpty a {
+		display: block;
+		border: 2px solid  #ff464e;
+		color:  #ff464e;
+		font-size: 0.42rem;
+		width: 3.5rem;
+		height: 1.2rem;
+		line-height: 1.2rem;
+		margin-left: 36%;
+		margin-top: 0.6rem;
 	}
 </style>

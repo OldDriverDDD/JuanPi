@@ -13,7 +13,7 @@ export default new Vuex.Store({
 		ADD_GOODSNUM(state, newItem) {
 			var flag = false;
 			state.arr.map(function(item){
-				if(newItem.title == item.title) {
+			if(newItem.title == item.title) {
 					item.count++;
 					console.log('add')
 					flag = true;
