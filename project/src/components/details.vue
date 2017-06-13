@@ -214,11 +214,7 @@
 		//在页面创建之后调用一次添加count的方法
 		created() {
 			// console.log(this.comms)
-			this.$store.commit('ADD_GOODSNUM', this.comms);
-		
-
-			
-
+			// this.$store.commit('ADD_GOODSNUM', this.comms);
 		},
 		mounted() {
 			// console.log(this.comms);
